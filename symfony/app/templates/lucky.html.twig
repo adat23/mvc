@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic image{% endblock %}
+
+{% block body %}
+    <h1>Magiska bilder</h1>
+    <p>Välkommen till slumpade bilder, har du tur blir det en bild på en katt, ladda om och försök igen</p>
+    
+    <figure class="lucky">
+        <img src='build/images/random/{{ number }}.jpg' alt="{{ number }}">
+    </figure>
+    <p>Nuvarande nummer: {{ number }}</p>
+{% include "footer.html.twig" %}
+
+{% endblock %}

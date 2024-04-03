@@ -4,10 +4,21 @@
 
 {% block body %}
     <h1>About</h1>
-    <p>An image which can be clicked on.</p>
-    <a href="{{ asset('img/glider.svg') }}">
-        <img src="{{ asset('img/glider.svg') }}" alt="">
-    </a>
+    <div class="about">
+        <div class="sida">
+            <ul>
+                <li><a href="https://github.com/adat23/mvc.git">Min Github</a></li>
+                <li><a href="https://github.com/dbwebb-se/mvc.git">dbwebb Github</a></li>
+            </ul>
+        </div>
+        <div class="text">
+            <p>Kursen Objektorienterade webbteknologier, a.k.a. mvc, fokuserar på objektorienterade programmeringstekniker i programmeringsspråket PHP. 
+            Klassiska objektorienterade konstruktioner hanteras tillsammans med objektorienterad programmering i webbaserat ramverk tillsammans med databaser 
+            samt enhetstestning.</p>
+        </div>
+    </div>    
 
-    <img src="{{ asset('build/images/background.jpg') }}" alt="background">
+{% include "footer.html.twig" %}
+
 {% endblock %}
+
