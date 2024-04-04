@@ -6,7 +6,7 @@ Description: README
 README
 ==========================
 
-<img src="./symfony/app/assets/images/read.jpg" alt="readme">
+<img src="./assets/images/read.jpg" alt="readme">
 
 ## Information om denna hemsida
 Denna hemsida är gjord av Adam Antonsson för kursen MVC. 

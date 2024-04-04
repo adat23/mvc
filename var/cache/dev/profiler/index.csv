@@ -474,3 +474,7 @@ c1ea4c,127.0.0.1,GET,http://localhost:8888/lucky,1712228896,,200,request
 19c989,127.0.0.1,GET,http://localhost:8888/lucky,1712228901,,200,request
 db2c3d,127.0.0.1,GET,http://localhost:8888/lucky,1712228902,,200,request
 3b904a,127.0.0.1,GET,http://localhost:8888/lucky,1712228904,,200,request
+635427,127.0.0.1,GET,http://localhost:8888/api,1712230961,,200,request
+53df16,127.0.0.1,GET,http://localhost:8888/,1712230963,,200,request
+1c3ef7,127.0.0.1,GET,http://localhost:8888/report,1712230966,,200,request
+746e83,127.0.0.1,GET,http://localhost:8888/about,1712230968,,200,request
