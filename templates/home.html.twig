@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Hem{% endblock %}
+
+{% block body %}
+    <h1>Hem</h1>
+
+    <main>
+        <article>
+            <div class="home">
+                <div class="bilder">
+                    <figure class="jag"><img src="{{ asset('build/images/jag.jpg') }}" alt="jag"></figure>
+                    <figure class="katter">
+                        <img class="katter" src="{{ asset('build/images/katter.png') }}" alt="katter">
+                    <figcaption>Från vänster: Windy, Neppy & Ariel</figcaption>
+                    </figure>
+                </div>
+                <div class="text">
+                    <p>Mitt namn är Adam Antonsson, jag är 34år gammal i skrivande stund och har sedan gymnasiet egentligen varit intresserad av programmering men inte riktigt fått tummen ur
+                        till att börja lära mig. </p>
+                    <p>Nu har jag sedan i hösten 2023 gått kurser på BTH för att lära mig och se om jag kan tycka att detta är något för mig, hitills har det varit fantastiskt givande och roligt
+                        och verkar fortsätta på samma sätt. </p>
+                    <p>Jag arbetar i Försvarsmakten och bor i Karlskrona, så arbete på 100% tillsammans med studier känns vissa gånger tugnt men väldigt skönt att allting sker på distans och 
+                        att det hitills inte varit några lektioner eller liknande med obligatorisk närvaro har gjort att detta överhuvudtaget är möjligt för min del. </p>
+                    <p>Jag bor tillsammans med min sambo och våra tre katter som ofta får agera motiv i de olika kursmomenten då det ska vara bilder med.</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+{% include "footer.html.twig" %}
+
+{% endblock %}
+
