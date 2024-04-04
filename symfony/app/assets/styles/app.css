@@ -92,8 +92,12 @@ h1 {
     border-right: 2px #ccc;
 }
 
-.sida a{
+.sida a {
     color: #111;
+}
+
+.mvc img {
+    max-width: 250px;
 }
 /* home */
 
@@ -138,7 +142,7 @@ h1 {
     color: #111;
 }
 
-.links .a:visited {
+.links a:visited {
     color: #ccc;
 }
 
@@ -149,4 +153,17 @@ h1 {
 /* Lucky */
 .lucky img {
     max-width: 800px;
+}
+
+/* api */
+.api ul {
+    list-style-type: none;
+}
+
+.api a {
+    color: #111;
+}
+
+.api a:visited {
+    color: #ccc;
 }

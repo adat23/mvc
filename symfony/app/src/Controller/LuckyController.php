@@ -61,4 +61,15 @@ class LuckyController
         );
         return $response;
     }
+
+    // #[Route('/api/quote')]
+    // public function quote(): Response
+    // {
+    //     $number = random_int(1, 3);
+
+    //     return new Response(
+    //         ''.$number.''
+    //     );
+    // }
+
 }

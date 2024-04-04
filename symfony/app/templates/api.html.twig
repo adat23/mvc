@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Api{% endblock %}
+
+{% block body %}
+    <h1>Routes</h1>
+    <p>Listan nedan har länkar till alla routes på denna hemsida</p>
+    <ul class="api">
+        <li><a href="{{ path('home') }}">/</a></li>
+        <li><a href="{{ path('about') }}">/about</a></li>
+        <li><a href="{{ path('report') }}">/report</a></li>
+        <li><a href="{{ path('lucky_number') }}">/lucky</a></li>
+        <li><a href="/lucky/number">/lucky/number</a></li>
+        <li><a href="/lucky/hi">/lucky/hi</a></li>
+        <li><a href="{{ path('api') }}">/api</a></li>
+        <li><a href="{{ path('quote') }}">/api/quote</a></li>
+        <li><a href="/api/lucky/number">/api/lucky/number</a></li>
+    </ul>
+{% include "footer.html.twig" %}
+
+{% endblock %}
