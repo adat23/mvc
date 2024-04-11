@@ -12,23 +12,23 @@ class LuckyControllerJson
     // public function jsonApi(): Response
     // {
     //     return $this->render('api.html.twig');
-        // $number = random_int(1, 11);
+    // $number = random_int(1, 11);
 
-        // $data = [
-        //     'number' => $number
-        // ];
+    // $data = [
+    //     'number' => $number
+    // ];
 
-        // // return new JsonResponse($data);
+    // // return new JsonResponse($data);
 
-        // $response = new JsonResponse($data);
-        // $response->setEncodingOptions(
-        //     $response->getEncodingOptions() | JSON_PRETTY_PRINT
-        // );
-        // return $response;
+    // $response = new JsonResponse($data);
+    // $response->setEncodingOptions(
+    //     $response->getEncodingOptions() | JSON_PRETTY_PRINT
+    // );
+    // return $response;
     // }
 
     #[Route("/api/quote", name: "quote")]
-    public function jsonQuote(): Response 
+    public function jsonQuote(): Response
     {
         $date = date("Y.m.d");
         $timestamp = date("Y-m-d H:i:s");

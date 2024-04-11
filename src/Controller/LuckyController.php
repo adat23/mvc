@@ -52,7 +52,7 @@ class LuckyController
             'lucky-number' => $number,
             'lucky-message' => 'Hi there!',
         ];
-        
+
         // return new JsonResponse($data);
 
         $response = new JsonResponse($data);

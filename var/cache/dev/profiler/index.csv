@@ -498,3 +498,11 @@ ac8a9b,127.0.0.1,GET,http://localhost:8888/about,1712231797,,200,request
 42127b,127.0.0.1,GET,http://localhost:8888/about,1712249257,,200,request
 93e3cf,127.0.0.1,GET,http://localhost:8888/report,1712249259,,200,request
 888376,127.0.0.1,GET,http://localhost:8888/report,1712249280,,200,request
+161894,127.0.0.1,GET,http://127.0.0.1:8888/app/public/game/pig,1712760189,dcfadd,404,request
+dcfadd,127.0.0.1,GET,http://127.0.0.1:8888/app/public/game/pig,1712760189,,404,request
+2728f0,127.0.0.1,GET,http://127.0.0.1:8888/app/public/game/pig,1712760917,c672d3,404,request
+c672d3,127.0.0.1,GET,http://127.0.0.1:8888/app/public/game/pig,1712760917,,404,request
+110a4a,127.0.0.1,GET,http://localhost:8888/app/public/game/pig,1712760936,e1ac9c,404,request
+e1ac9c,127.0.0.1,GET,http://localhost:8888/app/public/game/pig,1712760936,,404,request
+eb7c80,127.0.0.1,GET,http://localhost:8888/app/public/game/pig,1712772633,06c01a,404,request
+06c01a,127.0.0.1,GET,http://localhost:8888/app/public/game/pig,1712772633,,404,request
