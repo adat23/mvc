@@ -190,6 +190,6 @@ class __TwigTemplate_c318147d0defc85a160b41245916f8f8 extends Template
 
 {% endblock %}
 
-", "home.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/home.html.twig");
+", "home.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/home.html.twig");
     }
 }

@@ -1847,6 +1847,6 @@ class __TwigTemplate_b57519bcdaf9c2b6dc9061d129374e55 extends Template
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/vendor/doctrine/doctrine-bundle/templates/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/vendor/doctrine/doctrine-bundle/templates/Collector/db.html.twig");
     }
 }

@@ -88,15 +88,19 @@ class __TwigTemplate_51d8245071b8ecb66969689691076354 extends Template
         // line 22
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lucky_number");
         echo "\">Kattlycka</a></li>
+                    <li><a href=\"";
+        // line 23
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("card");
+        echo "\">Kort</a></li>
                 </ul>
             </nav>
         </header>
     </head>
     <body>
         ";
-        // line 28
-        $this->displayBlock('body', $context, $blocks);
         // line 29
+        $this->displayBlock('body', $context, $blocks);
+        // line 30
         echo "    </body>
 </html>
 ";
@@ -196,7 +200,7 @@ class __TwigTemplate_51d8245071b8ecb66969689691076354 extends Template
 
     }
 
-    // line 28
+    // line 29
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -235,7 +239,7 @@ class __TwigTemplate_51d8245071b8ecb66969689691076354 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  200 => 28,  181 => 13,  171 => 14,  169 => 13,  164 => 12,  154 => 11,  141 => 8,  131 => 7,  112 => 5,  100 => 29,  98 => 28,  89 => 22,  85 => 21,  81 => 20,  77 => 19,  69 => 15,  67 => 11,  64 => 10,  62 => 7,  58 => 6,  54 => 5,  48 => 1,);
+        return array (  204 => 29,  185 => 13,  175 => 14,  173 => 13,  168 => 12,  158 => 11,  145 => 8,  135 => 7,  116 => 5,  104 => 30,  102 => 29,  93 => 23,  89 => 22,  85 => 21,  81 => 20,  77 => 19,  69 => 15,  67 => 11,  64 => 10,  62 => 7,  58 => 6,  54 => 5,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -262,6 +266,7 @@ class __TwigTemplate_51d8245071b8ecb66969689691076354 extends Template
                     <li><a href=\"{{ path('about') }}\">Om</a></li>
                     <li><a href=\"{{ path('report') }}\">Rapport</a></li>
                     <li><a href=\"{{ path('lucky_number') }}\">Kattlycka</a></li>
+                    <li><a href=\"{{ path('card') }}\">Kort</a></li>
                 </ul>
             </nav>
         </header>
@@ -270,6 +275,6 @@ class __TwigTemplate_51d8245071b8ecb66969689691076354 extends Template
         {% block body %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/base.html.twig");
+", "base.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/base.html.twig");
     }
 }

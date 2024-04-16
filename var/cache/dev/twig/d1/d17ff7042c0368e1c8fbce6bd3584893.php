@@ -143,6 +143,6 @@ class __TwigTemplate_13758cfb206a0e30ed4b9ece099806f0 extends Template
     </div>
 </footer>
 </body>
-</html>", "footer.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/footer.html.twig");
+</html>", "footer.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/footer.html.twig");
     }
 }

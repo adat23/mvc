@@ -177,6 +177,6 @@ class __TwigTemplate_2d4996f0688c7d098a0bf82fbb865bff extends Template
 {% include \"footer.html.twig\" %}
 
 {% endblock %}
-", "api.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/api.html.twig");
+", "api.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/api.html.twig");
     }
 }

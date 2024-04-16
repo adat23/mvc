@@ -983,6 +983,6 @@ class __TwigTemplate_4a636d5035f8abe7652f4782054748a0 extends Template
         </td>
     </tr>
 {% endmacro %}
-", "@DoctrineMigrations/Collector/migrations.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/vendor/doctrine/doctrine-migrations-bundle/Resources/views/Collector/migrations.html.twig");
+", "@DoctrineMigrations/Collector/migrations.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/vendor/doctrine/doctrine-migrations-bundle/Resources/views/Collector/migrations.html.twig");
     }
 }

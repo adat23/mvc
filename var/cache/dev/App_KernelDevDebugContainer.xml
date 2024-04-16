@@ -355,6 +355,17 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Card\Card" class="App\Card\Card" autowire="true" autoconfigure="true"/>
+    <service id="App\Card\CardGraphic" class="App\Card\CardGraphic" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="The autoloader expected class &quot;App\Card\CardGraphic&quot; to be defined in file &quot;/home/adam/dbwebb-kurser/mvc/me/report/vendor/composer/../../src/Card/CardGraphic.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
+    </service>
+    <service id="App\Controller\CardGameController" class="App\Controller\CardGameController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jUv.zyj.App\Controller\CardGameController"/>
+      </call>
+    </service>
     <service id="App\Controller\LuckyController" class="App\Controller\LuckyController" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\LuckyControllerJson" class="App\Controller\LuckyControllerJson" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" public="true" autowire="true" autoconfigure="true">
@@ -7019,6 +7030,9 @@
         <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8012,6 +8026,12 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.jUv.zyj.App\Controller\CardGameController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CardGameController"/>
+      <argument>App\Controller\CardGameController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jUv.zyj" method="withContext"/>
+    </service>
     <service id=".service_locator.jUv.zyj.App\Controller\LuckyControllerTwig" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\LuckyControllerTwig"/>
       <argument>App\Controller\LuckyControllerTwig</argument>
@@ -8187,6 +8207,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\CardGameController</argument>
           <argument>App\Controller\LuckyControllerTwig</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>

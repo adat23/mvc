@@ -14,6 +14,7 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/card' => [[['_route' => 'card', '_controller' => 'App\\Controller\\CardGameController::home'], null, null, null, false, false, null]],
         '/lucky/number' => [[['_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'], null, null, null, false, false, null]],
         '/lucky/hi' => [[['_route' => 'app_lucky_hi', '_controller' => 'App\\Controller\\LuckyController::hi'], null, null, null, false, false, null]],
         '/api/lucky/number' => [[['_route' => 'app_lucky_jsonnumber', '_controller' => 'App\\Controller\\LuckyController::jsonNumber'], null, null, null, false, false, null]],

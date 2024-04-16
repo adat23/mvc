@@ -155,6 +155,6 @@ class __TwigTemplate_ca5088723945edb0cbc28051f075c062 extends Template
 {% include \"footer.html.twig\" %}
 
 {% endblock %}
-", "lucky.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/lucky.html.twig");
+", "lucky.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/lucky.html.twig");
     }
 }

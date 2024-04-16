@@ -175,6 +175,6 @@ class __TwigTemplate_066b643bfdfc5339fc1f3f4c9eae3a3a extends Template
 
 {% endblock %}
 
-", "about.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/symfony/app/templates/about.html.twig");
+", "about.html.twig", "/home/adam/dbwebb-kurser/mvc/me/report/templates/about.html.twig");
     }
 }
