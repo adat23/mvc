@@ -356,9 +356,7 @@
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
     <service id="App\Card\Card" class="App\Card\Card" autowire="true" autoconfigure="true"/>
-    <service id="App\Card\CardGraphic" class="App\Card\CardGraphic" autowire="true" autoconfigure="true">
-      <tag name="container.error" message="The autoloader expected class &quot;App\Card\CardGraphic&quot; to be defined in file &quot;/home/adam/dbwebb-kurser/mvc/me/report/vendor/composer/../../src/Card/CardGraphic.php&quot;. The file was found but the class was not in it, the class name or namespace probably has a typo."/>
-    </service>
+    <service id="App\Card\CardGraphic" class="App\Card\CardGraphic" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\CardGameController" class="App\Controller\CardGameController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
