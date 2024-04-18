@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Card\Card;
+use App\Card\Deck;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,18 +20,45 @@ class CardGameController extends AbstractController
         return $this->render('card.html.twig');
     }
 
-    #[Route("/card/deck", name: "deck")]
-    public function presentCard(): Response
-    {
-        $card = new Card();
+    // #[Route("/card/deck", name: "deck")]
+    // public function presentCard(): Response
+    // {
+        
+        // Tag bort allt och börja med session istället och skapa kortleken där istället..
+        // $card = new Card();
 
-        $data = [
-            "card" => $card->card(),
-            "cardString" => $card->getAsString(),
-        ];
 
-        return $this->render('card/deck.html.twig', $data);
-    }
+        // while($card <= 52){
+        // $card++;
+        // };
+        
+        // $data = [
+        //     "card" => $card->card(),
+        //     "cardString" => $card->getAsString(),
+        // ];
+        // $card = new Card();
+
+        // for ($i = 1; $i <= 52; $i++) {
+        //     $card = $i;
+        //     echo $i;
+        // };
+
+        // $deck = [];
+        // for ($i = 1; $i <= 52; $i++) {
+        //     $card = new Card();
+        //     $card->card();
+        //     $deck[] = $card->getAsString();
+
+        // }
+
+        // $data = [
+        //     "card" => $card->shuffle(52),
+        //     "cardString" => $deck,
+        // ];
+
+
+    //     return $this->render('card/deck.html.twig', $data);
+    // }
 
 
     // #[Route("/card/deck", name: "deck")]
@@ -56,15 +84,72 @@ class CardGameController extends AbstractController
     //     return $this->render('card/deck.html.twig', $data);
     // }
 
-        // #[Route('/session/')]
-    // public function session(
-    //     SessionInterface $session
-    // ): Response
-    // {
-    //     $data = [
-    //         "session" => $session
-    //     ];
+    #[Route("/test", name: "test_get", methods: ['GET'])]
+    public function test(): Response
+    {
+        return $this->render('card/test.html.twig');
+    }
 
-    //     return $this->render('card/session.html.twig', $data);
-    // }
+    #[Route("/test", name: "test_post", methods: ['POST'])]
+    public function testCallback(
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
+
+        $num_cards = $request->request->get('num_cards');
+
+        // $data = [
+        // "card" => $session->set("card", 52),
+        // ];
+        $session->set("num_cards", $num_cards);
+
+        $this->addFlash(
+            'Sådär',
+            'nu är sessionen initierad'
+        );
+        return $this->redirectToRoute('session');
+    }
+
+    #[Route("/session", name: "session", methods: ['GET'])]
+    public function session(
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
+
+        $num_cards = $session->get("num_cards");
+
+        $data = [
+            "num_cards" => $session->get("num_cards"),
+        ];
+
+        return $this->render('card/session.html.twig', $data);
+    }
+
+    #[Route("/session/delete", name: "session_delete_get", methods: ['GET'])]
+    public function sessionDeleteGet(
+        SessionInterface $session
+    ): Response
+    {
+        session_destroy();
+
+        return $this->redirectToRoute('test_get');
+    } 
+
+
+    #[Route("/session/delete", name: "session_delete_post", methods: ['POST'])]
+    public function sessionDelete(
+        SessionInterface $session
+    ): Response
+    {
+        session_destroy();
+
+        $this->addFlash(
+            'Sådär',
+            'nu är sessionen raderad'
+        );
+        return $this->redirectToRoute('test_get');
+    } 
+
 }

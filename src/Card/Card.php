@@ -11,22 +11,26 @@ class Card
         $this->value = null;
     }
 
-    public function card(): string
+    public function card()
     {
-        // while ($value >= 52){ 
-        //     for ($value = 1; $value <= 52; $value++) {
-        //         echo "The card is: $value <br>";
-        //     }
-        // }
         
+        for ($i = 1; $i <= 52; $i++) {
+            echo "The card is: $i <br>";
+            
+        }
+        return $this->value;
         // $this->value = count(1-52);
 
-        $this->value = random_int(1, 52);
+        // $this->value = random_int(1, 52);
 
-        return $this->value;
-
-
-        // Card ska ju vara random... deck ska presentera alla möjligheter från card i ordning!
+        // for($i = 1; $i <= 52; $i++) {
+        //     $value = $i;
+        // }
+        // $i = range(1, 52);
+        // $value = implode(", ", $i);
+        
+        
+        
     }
 
     public function shuffle(): int

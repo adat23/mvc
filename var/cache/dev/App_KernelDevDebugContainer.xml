@@ -357,6 +357,7 @@
     </service>
     <service id="App\Card\Card" class="App\Card\Card" autowire="true" autoconfigure="true"/>
     <service id="App\Card\CardGraphic" class="App\Card\CardGraphic" autowire="true" autoconfigure="true"/>
+    <service id="App\Card\Deck" class="App\Card\Deck" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\CardGameController" class="App\Controller\CardGameController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>

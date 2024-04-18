@@ -1,0 +1,21 @@
+{% block main %}
+<h1>session</h1>
+
+
+{{ num_cards }}
+
+
+
+{{ dump(app.session.all) }}
+
+{# {% for key, value in app.session %}
+    session['{{ key }}'] = {{ value }}
+{% endfor %} #}
+
+<form method="post" action="session/delete">
+    <input type="submit" name="do_it" value="Delete Session">
+</form>
+
+{{ include('flash.html.twig') }}
+
+{% endblock %}
