@@ -4,10 +4,13 @@
 <p>Här är kortleken</p>
 
 <ul>
-    <li>{{ card }}</li>
-    <li>{{ cardString }}</li>
+    {# <li>{{ deck }}</li> #}
+    {# <li>{{ deckString }}</li> #}
     {# {% for card in card %}
         <li>{{ card }}</li>
     {% endfor %} #}
 </ul>
+
+{{ dump(app.session.all) }}
+
 {% endblock %}
