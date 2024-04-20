@@ -3,13 +3,29 @@
 
 <p>Här är kortleken</p>
 
-<ul>
-    {# <li>{{ deck }}</li> #}
-    {# <li>{{ deckString }}</li> #}
-    {# {% for card in card %}
-        <li>{{ card }}</li>
-    {% endfor %} #}
-</ul>
+{# <ul> #}
+    {# <li>{{ dump(deck) }}</li> #}
+    {# <li>{{ cards }}</li> #}
+<table class="full_deck">
+{% for value in cards %}
+    <span class="cards"> {{ value }} </span>
+{% endfor %}
+</table>
+
+<table class="full_deck">
+{% for value in cards|batch(4) %}
+    <tr>
+        {% for index, column in value %}
+            <td> {{ index }} - {{ column }} </td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+
+
+    {# <li>{{ dump(deckString) }}</li> #}
+    {# {{ app.session.get('deck') }} #}
+{# </ul> #}
 
 {{ dump(app.session.all) }}
 

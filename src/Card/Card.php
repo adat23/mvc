@@ -6,47 +6,35 @@ class Card
 {
     protected $value;
 
-    public $deck = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'); 
-
     public function __construct()
     {
         $this->value = null;
     }
 
-    public function deck(): array
-    {
+    public function deck(): string
+    {    
+        // $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+        // $suits  = array('S', 'H', 'D', 'C');
         
-        // for ($i = 1; $i <= 52; $i++) {
-        //     $session->set("deck", $i);
-            
+        // $deckArray = array();
+        // foreach ($suits as $suit) {
+        //     foreach ($values as $value) {
+        //         $deckArray[] = $suit . $value;
+        //     }
         // }
 
-        $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
-        $suits  = array('S', 'H', 'D', 'C');
-        
-        $cards = array();
-        foreach ($suits as $suit) {
-            foreach ($values as $value) {
-                $cards[] = $value . $suit;
-            }
-        }
-        
-        return $cards;
-  
+        // $deck = join(", ", $deckArray);
 
-        // return $this->value;
-        // $this->value = count(1-52);
-
-        // $this->value = random_int(1, 52);
-
-        // for($i = 1; $i <= 52; $i++) {
-        //     $value = $i;
+        // foreach ($deckArray as $element) {
+        //     $deck .= $element . ", ";
         // }
-        // $i = range(1, 52);
-        // $value = implode(", ", $i);
-        
-        
-        
+        // $deck = rtrim($deck, ", ");
+
+        // $session->set("deck", $deck);
+
+        // return $deck;
+
+        return $this->value;
     }
 
     public function shuffle(): int

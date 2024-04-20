@@ -24,6 +24,7 @@ return [
             [['_route' => 'session_delete_post', '_controller' => 'App\\Controller\\CardGameController::sessionDelete'], null, ['POST' => 0], null, false, false, null],
         ],
         '/card' => [[['_route' => 'card', '_controller' => 'App\\Controller\\CardGameController::home'], null, null, null, false, false, null]],
+        '/card/deckinit' => [[['_route' => 'init_deck', '_controller' => 'App\\Controller\\CardGameController::init_deck'], null, null, null, false, false, null]],
         '/card/deck' => [[['_route' => 'deck', '_controller' => 'App\\Controller\\CardGameController::deck'], null, ['GET' => 0], null, false, false, null]],
         '/lucky/number' => [[['_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'], null, null, null, false, false, null]],
         '/lucky/hi' => [[['_route' => 'app_lucky_hi', '_controller' => 'App\\Controller\\LuckyController::hi'], null, null, null, false, false, null]],

@@ -187,3 +187,12 @@ h1 {
 .flash-warning:before {
     content: "⚠";
 }
+
+.full_deck div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.cards div{
+    display: flex;
+}

@@ -88,17 +88,12 @@ class CardGameController extends AbstractController
         return $this->render('card.html.twig');
     }
 
-    #[Route("/card/deck", name: "deck", methods: ['GET'])]
-    public function deck(
+    #[Route("/card/deckinit", name: "init_deck")]
+    public function init_deck(
         Request $request,
         SessionInterface $session
     ): Response
     {
-
-        // $deck = new Card();
-
-        // $deck = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
-
         $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
         $suits  = array('S', 'H', 'D', 'C');
         
@@ -109,83 +104,44 @@ class CardGameController extends AbstractController
             }
         }
 
+        // $deck = new Card();
+
         $session->set("deck", $deck);
+
+        return $this->redirectToRoute('deck');
+    }
+
+    #[Route("/card/deck", name: "deck", methods: ['GET'])]
+    public function deck(
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
+
+        // $deck = new Card();
+
+        // $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+        // $suits  = array('S', 'H', 'D', 'C');
         
+        // $deck = array();
+        // foreach ($suits as $suit) {
+        //     foreach ($values as $value) {
+        //         $deck[] = $suit . $value;
+        //     }
+        // }
+
+        // $session->set("deck", $deck);
+        
+        $cards = $session->get("deck");
+
+
         $data = [
-            "deck" => $deck,
+            "cards" => $session->get("deck"),
             // ->deck(),
             // "deckstring" => $deck->getAsString(),
         ];
 
         return $this->render('card/deck.html.twig', $data);
     }  
-
-
-
-// TIDIGARE TESTER
-
-       // #[Route("/card/deck", name: "deck")]
-    // public function presentCard(): Response
-    // {
-        
-        // Tag bort allt och börja med session istället och skapa kortleken där istället..
-        // $card = new Card();
-
-
-        // while($card <= 52){
-        // $card++;
-        // };
-        
-        // $data = [
-        //     "card" => $card->card(),
-        //     "cardString" => $card->getAsString(),
-        // ];
-        // $card = new Card();
-
-        // for ($i = 1; $i <= 52; $i++) {
-        //     $card = $i;
-        //     echo $i;
-        // };
-
-        // $deck = [];
-        // for ($i = 1; $i <= 52; $i++) {
-        //     $card = new Card();
-        //     $card->card();
-        //     $deck[] = $card->getAsString();
-
-        // }
-
-        // $data = [
-        //     "card" => $card->shuffle(52),
-        //     "cardString" => $deck,
-        // ];
-
-
-    //     return $this->render('card/deck.html.twig', $data);
-    // }
-
-
-    // #[Route("/card/deck", name: "deck")]
-    // public function PresentDeck(): Response
-    // {
-    //     // $deck = new Card();
-    //     // $data = [
-    //     //     "deck" => $deck->deck(),
-    //     //     "deckString" => $deck->getAsString(),
-    //     // ];
-
-    //     $deckString = [];
-    //     for ($i = 1; $i <= 52; $i++) {
-    //         $deck = new Card();
-    //         $deck->deck();
-    //         $deckString[] = $deck->getAsString();
-    //     }
-    //     $data = [
-    //         "deck" => count($deckString),
-    //         "deckString" => $deckString,
-    //     ];
-
-    //     return $this->render('card/deck.html.twig', $data);
-    // }
 
 }
