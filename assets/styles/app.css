@@ -188,11 +188,61 @@ h1 {
     content: "⚠";
 }
 
-.full_deck div{
+.full_deck {
     display: grid;
+    grid-column: 4;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    font-size: 5em;
+    /* border: 2px solid black; */
 }
 
-.cards div{
+.card {
     display: flex;
+    font-size: 5em;
+    border: 2px solid black;
+}
+
+.die {
+    font-size: 5em;
+}
+
+h3 {
+    display:inline;
+    /* color: orange; */
+}
+
+.card_♥ {
+    background-color: white;
+    color: red;
+    border: 2px solid black;
+    max-width: 1.7em;
+    height: 3em;
+    text-align: center;
+}
+
+.card_♦ {
+    background-color: white;
+    color: red;
+    border: 2px solid black;
+    max-width: 1.7em;
+    height: 3em;
+    text-align: center;
+}
+
+.card_♠ {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    max-width: 1.7em;
+    height: 3em;
+    text-align: center;
+}
+
+.card_♣ {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    max-width: 1.7em;
+    height: 3em;
+    text-align: center;
 }

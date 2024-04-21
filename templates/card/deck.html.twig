@@ -1,3 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cardgame{% endblock %}
+
 {% block body %}
 <h1>Visa kortleken</h1>
 
@@ -5,14 +9,14 @@
 
 {# <ul> #}
     {# <li>{{ dump(deck) }}</li> #}
-    {# <li>{{ cards }}</li> #}
-<table class="full_deck">
+    {# <li>{{ dump(cards) }}</li> #}
+ {# <table class="full_deck">
 {% for value in cards %}
     <span class="cards"> {{ value }} </span>
 {% endfor %}
-</table>
+</table>  #}
 
-<table class="full_deck">
+{# <table class="full_deck">
 {% for value in cards|batch(4) %}
     <tr>
         {% for index, column in value %}
@@ -20,13 +24,59 @@
         {% endfor %}
     </tr>
 {% endfor %}
+</table> #}
+
+
+{# {% if( cards ) %}
+<table class="full_deck">
+{% for value in cards|batch(4) %}
+    <tr class="cards">
+        {% for column in value %}
+            <td> {{ column }} </td>
+        {% endfor %}
+    </tr>
+{% endfor %}
 </table>
+{% else %}
+<p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
+{% endif %}
+ #}
 
+ {# '♠', '♥', '♦', '♣' #}
 
-    {# <li>{{ dump(deckString) }}</li> #}
-    {# {{ app.session.get('deck') }} #}
-{# </ul> #}
+{% if( cards ) %}
+<div class="full_deck">
+{% for value in cards|batch(4) %}
+            {% for column in value %}
+                 {% if '♠' in column %} 
+                    <div class="card_♠">           
+                    {{ column }}
+                    </div>
+                {% elseif '♥' in column %}
+                    <div class="card_♥"> 
+                    {{ column }}
+                    </div>
+                {% elseif '♦' in column %}
+                    <div class="card_♦"> 
+                    {{ column }}
+                    </div>
+                {% else %}
+                    <div class="card_♣"> 
+                    {{ column }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        
+{% endfor %}
+</div>
+{% else %}
+<p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
+{% endif %}
+
 
 {{ dump(app.session.all) }}
+
+
+{% include "footer.html.twig" %}
 
 {% endblock %}

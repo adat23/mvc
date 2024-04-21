@@ -95,12 +95,12 @@ class CardGameController extends AbstractController
     ): Response
     {
         $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
-        $suits  = array('S', 'H', 'D', 'C');
+        $suits  = array('♠', '♥', '♦', '♣');
         
         $deck = array();
         foreach ($suits as $suit) {
             foreach ($values as $value) {
-                $deck[] = $suit . $value;
+                $deck[] = $value . $suit;
             }
         }
 
