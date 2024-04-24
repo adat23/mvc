@@ -3,7 +3,7 @@
 {% block title %}Cardgame{% endblock %}
 
 {% block body %}
-<h1>Visa kortleken</h1>
+<h1>Visa blandad</h1>
 
 <p>Här är kortleken</p>
 
@@ -11,7 +11,7 @@
 
 
  {# '♠', '♥', '♦', '♣' #}
-
+<li><a href="{{ path('shuffle') }}">blanda kortleken igen</a></li>
 {% if( deck ) %}
 <div class="full_deck">
 {% for value in deck|batch(4) %}  {# |batch(4) #}
@@ -43,8 +43,7 @@
 
 
 session: {{ dump(app.session.all) }}
-deck: {{ dump(deck) }}
-jokers: {{ dump(cardjokers) }}
+{# deck: {{ dump(deckshuffle) }} #}
 {# cards: {{ dump(cards) }} #}
 
 {% include "footer.html.twig" %}

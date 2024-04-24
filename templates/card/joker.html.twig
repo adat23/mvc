@@ -3,18 +3,18 @@
 {% block title %}Cardgame{% endblock %}
 
 {% block body %}
-<h1>Visa kortleken</h1>
+<h1>Visa Jokrar</h1>
 
-<p>Här är kortleken</p>
+<p>Här är jokrarna</p>
 
 
 
 
  {# '♠', '♥', '♦', '♣' #}
 
-{% if( deck ) %}
+{% if( jokers ) %}
 <div class="full_deck">
-{% for value in deck|batch(4) %}  {# |batch(4) #}
+{% for value in jokers|batch(4) %}  {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           
@@ -44,7 +44,7 @@
 
 session: {{ dump(app.session.all) }}
 deck: {{ dump(deck) }}
-jokers: {{ dump(cardjokers) }}
+jokers: {{ dump(jokers) }}
 {# cards: {{ dump(cards) }} #}
 
 {% include "footer.html.twig" %}

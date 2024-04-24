@@ -1,11 +1,11 @@
 {% block main %}
 <h1>Cardgame session test</h1>
 
-<p>How many dices do you want to have in your dice hand when playing the game?</p>
+<p>This has no actual function more than adding a variable to the session.</p>
 
 <form method="post" action="">
     <input type="number" name="num_cards" min="1" max="52" value="1">
-    <input type="submit" name="do_it" value="Start playing">
+    <input type="submit" name="do_it" value="Test">
 </form>
 
 <p>Current session: {{ dump(app.session.all) }} </p>
