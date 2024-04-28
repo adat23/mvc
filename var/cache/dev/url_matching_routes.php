@@ -29,6 +29,7 @@ return [
         '/card/deck' => [[['_route' => 'deck', '_controller' => 'App\\Controller\\CardGameController::deck'], null, ['GET' => 0], null, false, false, null]],
         '/card/deck/shuffle' => [[['_route' => 'shuffle', '_controller' => 'App\\Controller\\CardGameController::shuffle'], null, ['GET' => 0], null, false, false, null]],
         '/card/deck/joker' => [[['_route' => 'joker', '_controller' => 'App\\Controller\\CardGameController::addJoker'], null, ['GET' => 0], null, false, false, null]],
+        '/card/deck/draw' => [[['_route' => 'draw', '_controller' => 'App\\Controller\\CardGameController::draw'], null, ['GET' => 0], null, false, false, null]],
         '/lucky/number' => [[['_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'], null, null, null, false, false, null]],
         '/lucky/hi' => [[['_route' => 'app_lucky_hi', '_controller' => 'App\\Controller\\LuckyController::hi'], null, null, null, false, false, null]],
         '/api/lucky/number' => [[['_route' => 'app_lucky_jsonnumber', '_controller' => 'App\\Controller\\LuckyController::jsonNumber'], null, null, null, false, false, null]],

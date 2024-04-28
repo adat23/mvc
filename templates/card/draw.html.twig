@@ -12,9 +12,9 @@
 
  {# '♠', '♥', '♦', '♣' #}
 
-{% if( deck ) %}
+{% if( hand ) %}
 <div class="full_deck">
-{% for value in deck|batch(4) %}  {# |batch(4) #}
+{% for value in hand|batch(4) %}  {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           
@@ -43,9 +43,11 @@
 
 
 session: {{ dump(app.session.all) }}
+hand: {{ dump(hand) }}
+cut: {{ dump(cut) }}
 deck: {{ dump(deck) }}
+{# deckshuffle: {{ dump(deckshuffle) }} #}
 
-{# cards: {{ dump(cards) }} #}
 
 {% include "footer.html.twig" %}
 

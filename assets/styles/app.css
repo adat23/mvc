@@ -8,6 +8,7 @@ body {
 h1 {
     border-bottom: 4px double #ccc;
 }
+
 /* header */
 .site-header {
     /* height: 300px; */
@@ -209,6 +210,10 @@ h1 {
 h3 {
     display:inline;
     /* color: orange; */
+}
+
+a:visited {
+    color: white;
 }
 
 .card_♥ {

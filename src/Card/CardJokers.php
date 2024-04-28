@@ -5,10 +5,10 @@ namespace App\Card;
 class CardJokers extends Card
 {
     private $cardjokers = [
-        'J♠',
-        'J♥',
-        'J♦',
-        'J♣',
+        'Jo♠',
+        'Jo♥',
+        'Jo♦',
+        'Jo♣',
     ];
 
     public function __construct()
@@ -18,7 +18,7 @@ class CardJokers extends Card
 
     public function jokers($joker)
     {
-        array_push($joker, 'J♠', 'J♥', 'J♦','J♣');
+        array_push($joker, 'Jo♠', 'Jo♥', 'Jo♦','Jo♣');
         $this->value = $joker;
         return $this->value;
     }

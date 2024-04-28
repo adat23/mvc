@@ -34,6 +34,27 @@
                     </div>
                 {% endif %}
             {% endfor %}
+{% endfor %}
+{% for value in deck|batch(4) %}  {# |batch(4) #}
+            {% for column in value %}
+                 {% if '♠' in column %} 
+                    <div class="card_♠">           
+                    {{ column }}
+                    </div>
+                {% elseif '♥' in column %}
+                    <div class="card_♥"> 
+                    {{ column }}
+                    </div>
+                {% elseif '♦' in column %}
+                    <div class="card_♦"> 
+                    {{ column }}
+                    </div>
+                {% else %}
+                    <div class="card_♣"> 
+                    {{ column }}
+                    </div>
+                {% endif %}
+            {% endfor %}
         
 {% endfor %}
 </div>

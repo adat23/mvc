@@ -8,19 +8,19 @@ class CardHand
 {
     private $hand = [];
 
-    public function add(Card $card): void
+    public function add(Card $frck): void
     {
-        $this->hand[] = $card;
+        $this->hand[] = $deck;
     }
 
-    public function shuffle(): void
+    public function draw(): void
     {
         foreach ($this->hand as $card) {
-            $card->shuffle();
+            $card->draw();
         }
     }
-    
-    public function getNumberDices(): int
+
+    public function getNumberCards(): int
     {
         return count($this->hand);
     }

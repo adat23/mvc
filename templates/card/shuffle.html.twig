@@ -12,9 +12,9 @@
 
  {# '♠', '♥', '♦', '♣' #}
 <li><a href="{{ path('shuffle') }}">blanda kortleken igen</a></li>
-{% if( deck ) %}
+{% if( deckshuffle ) %}
 <div class="full_deck">
-{% for value in deck|batch(4) %}  {# |batch(4) #}
+{% for value in deckshuffle|batch(4) %}  {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           

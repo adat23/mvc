@@ -105,8 +105,10 @@ class CardGameController extends AbstractController
     ): Response
     {
         $deck = new Card();
+        $hand = array();
 
         $session->set("deck", $deck);
+        $session->set("hand", $hand);
 
         return $this->redirectToRoute('deck');
     }
@@ -125,7 +127,6 @@ class CardGameController extends AbstractController
 
         $deck = $session->get("deck");
 
-
         $data = [
             "deck" => $deck->deck(),
         ];
@@ -142,15 +143,17 @@ class CardGameController extends AbstractController
         
         $deckshuffle = $session->get("deck");
         
-        $deckshuffle->shuffle();
+        $deckshuffle->shuffle([]);
         
-        $session->set("deckshuffle", $deckshuffle);
+        $decks = $deckshuffle;
+        $session->set("deckshuffle", $decks);
+
         // $session->set("total_cards", $total_cards);
 
         $data = [
             // "deck" => ($session->get("deck")),
-            "deck" => $deckshuffle->shuffle(), 
-            // $deck->shuffle(),
+            "deckshuffle" => $deckshuffle->shuffle([]), 
+            // "deck" => $session->set("deckshuffle", $deckshuffle),
         ];
 
         return $this->render('card/shuffle.html.twig', $data);
@@ -163,23 +166,13 @@ class CardGameController extends AbstractController
     ): Response
     {
 
-        $jokers = new CardJokers();
+        $jokers = new CardJokers([]);
 
         $joker = array();
         
         $deck = $session->get("deck");
 
-        foreach ($deck as $value) {
-            $joker[] = $value;
-        }
-
-        $jokers->jokers($joker);
-
         $session->set("jokers", $jokers);
-
-        // $jokerdeck = array_merge($deck, $joker);
-
-        // $session->set("jokerdeck", $jokerdeck);
 
         $data = [
             "jokers" => $jokers->jokers($joker),
@@ -191,13 +184,55 @@ class CardGameController extends AbstractController
         // return $this->redirectToRoute('session');
     }
 
-    // #[Route("/card/deck/draw", name: "shuffle", methods: ['GET'])]
-    // public function draw(
-    //     Request $request,
-    //     SessionInterface $session
-    // ): Response
-    // {
+    #[Route("/card/deck/draw", name: "draw", methods: ['GET'])]
+    public function draw(
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
 
-    // }
+        $hand = new CardHand;
+        // if($session->has("hand")){
+        //     $hand = $session->get("hand");
+        // } else {
+        //     $hand = array();
+        // }
+      
+        // $deckshuffle = $session->get('deckshuffle');//['value'];
+
+        // $deck = array();
+        // // $deckarray = array_values($deckshuffle);
+        // foreach ($deckshuffle as $value) {
+        //     $deck[] = $value;
+        // }
+
+        $deck = array();
+        foreach($session->get('deckshuffle', array()) as $value) {
+            $deck[] = $value;
+        }
+        // $deck_keys = array_keys($deck);
+        // shuffle($deck_keys);
+
+        // foreach ( $deck_keys AS $deck_key ) {
+        //     $shuffled_array[  $deck_key  ] = $deck[  $deck_key  ];
+        // } 
+
+        $cut = array_slice($deck, 0, 1);
+
+        // $session->set("deckshuffle", $deck);
+
+        $hand = $cut;
+
+        $session->set("hand", $hand);
+
+        $data = [
+            "hand" => $hand,
+            // "deckshuffle" => $deckshuffle,
+            "deck" => $deck,
+            "cut" => $cut,
+        ];
+        
+        return $this->render('card/draw.html.twig', $data);
+    }
     
 }
