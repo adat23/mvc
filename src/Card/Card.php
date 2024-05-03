@@ -4,12 +4,12 @@ namespace App\Card;
 
 class Card
 {
-    protected $value;
-    protected $session;
+    // protected $value;
+    public $carddeck = [];
 
     public function __construct()
     {
-        $this->value = null;
+        $this->carddeck = null;
     }
 
     public function deck(): array
@@ -24,13 +24,13 @@ class Card
             }
         };
 
-        $this->value = $deck;
-        return $this->value;
+        serialize($deck);
+        $this->carddeck = $deck;
+        return $this->carddeck;
     }
 
-    public function shuffle()
+    public function shuffle_cards()
     {
-
         $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
         $suits  = array('♠', '♥', '♦', '♣',);    
 
@@ -40,28 +40,30 @@ class Card
                 $deck[] = $value . $suit;
             }
         };
-
-        $shuffled_array = array();
         
+        $shuffled_array = array();
+
         $deck_keys = array_keys($deck);
         shuffle($deck_keys);
 
         foreach ( $deck_keys AS $deck_key ) {
-            $shuffled_array[  $deck_key  ] = $deck[  $deck_key  ];
-        } 
+            $shuffled_array[ $deck_key ] = $deck[ $deck_key ];
+        }
+        serialize($shuffled_array);
 
-        $this->value = $shuffled_array;
-        return $this->value;
+
+        $this->carddeck = $shuffled_array;
+        return $this->carddeck;
     }
 
     public function getValue(): int
     {
-        return $this->value;
+        return $this->carddeck;
     }
 
     public function getAsString(): string
     {
 
-        return "[{$this->value}]";
+        return "[{$this->carddeck}]";
     }
 }

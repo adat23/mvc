@@ -35,7 +35,7 @@
                 {% endif %}
             {% endfor %}
 {% endfor %}
-{% for value in deck|batch(4) %}  {# |batch(4) #}
+ {% for value in deck.carddeck|batch(4) %}  {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           

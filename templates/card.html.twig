@@ -7,12 +7,14 @@
 
     <ul>
     ett gäng med länkar..
+        <li><a href="{{ path('init_deck') }}">Initiera kortleken</a></li>
         <li><a href="{{ path('deck') }}">Sortera kortleken</a></li>
+        <li><a href="{{ path('shuffle') }}">Blanda kortleken</a></li>
         <li><a href="{{ path('joker') }}">Visa jokrar</a></li>
-        <li><a href="{{ path('shuffle') }}">blanda kortleken</a></li>
         <li><a href="{{ path('draw') }}">Dra kort</a></li>
     </ul>
 
+{{ include('flash.html.twig') }}
 
 {% include "footer.html.twig" %}
 

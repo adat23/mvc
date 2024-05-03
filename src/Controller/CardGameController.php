@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class CardGameController extends AbstractController
@@ -66,7 +67,7 @@ class CardGameController extends AbstractController
     {
         session_destroy();
 
-        return $this->redirectToRoute('test_get');
+        return $this->redirectToRoute('session');
     } 
 
 
@@ -89,7 +90,7 @@ class CardGameController extends AbstractController
             'Sådär',
             'Nu är sessionen raderad'
         );
-        return $this->redirectToRoute('test_get');
+        return $this->redirectToRoute('session');
     } 
 
     #[Route('/card', name: "card")]
@@ -104,13 +105,18 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $deck = new Card();
+        // $deck = new Card();
         $hand = array();
 
-        $session->set("deck", $deck);
-        $session->set("hand", $hand);
+        // $session->set("deck", $deck);
+        
 
-        return $this->redirectToRoute('deck');
+        $this->addFlash(
+            'Sådär',
+            'Nu är kortleken initierad'
+        );
+
+        return $this->redirectToRoute('card');
     }
 
     #[Route("/card/deck", name: "deck", methods: ['GET'])]
@@ -121,12 +127,10 @@ class CardGameController extends AbstractController
     {
         $deck = new Card();
 
-        $session->set("deck", $deck);
+        $deckObject = $deck;
         
-        $cards = $session->get("deck");
-
-        $deck = $session->get("deck");
-
+        $session->set('deck', $deck);
+        // $_SESSION['deck'] = serialize($deck);
         $data = [
             "deck" => $deck->deck(),
         ];
@@ -140,20 +144,27 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
+        $shuffle = $session->get('deck');
         
-        $deckshuffle = $session->get("deck");
+        // unserialize($shuffle);
         
-        $deckshuffle->shuffle([]);
-        
-        $decks = $deckshuffle;
-        $session->set("deckshuffle", $decks);
+        // // $shuffle2[] = unserialize($shuffle);
+        // foreach($shuffle as $key=>$value) {
+        //     $shuffle[] = $value;
+        // };
+        // shuffle($shuffle);
+        // $shuffle->shuffle_cards($shuffle);
+        $shuffle->shuffle_cards();
+
+        // serialize($shuffle);
+        // $_SESSION["deck"] = $shuffle;
+        $session->set('deck', $shuffle);
 
         // $session->set("total_cards", $total_cards);
 
         $data = [
-            // "deck" => ($session->get("deck")),
-            "deckshuffle" => $deckshuffle->shuffle([]), 
-            // "deck" => $session->set("deckshuffle", $deckshuffle),
+            // "deck" => $session->get("deck"),
+            "deck" => $shuffle, //->shuffle_cards($deckshuffle), 
         ];
 
         return $this->render('card/shuffle.html.twig', $data);
@@ -165,18 +176,16 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-
-        $jokers = new CardJokers([]);
-
-        $joker = array();
-        
-        $deck = $session->get("deck");
-
-        $session->set("jokers", $jokers);
+        $deck[] = unserialize($session->get('deck'));
+        $jokers = new CardJokers($deck);
+        // $joker = array_merge([carddeck], $jokers);
+        // $deckjokers = array_merge($deck, $jokers[cardjokers]);
+        $session->set("jokers", serialize($jokers));
 
         $data = [
-            "jokers" => $jokers->jokers($joker),
-            "deck" => $deck->deck(),
+            "jokers" => $jokers->jokers($deck),
+            // "deck" => $session->get("deck"), blir fel för att det inte är direkt länkat till arrayet.
+            "deck" => unserialize($session->get('deck')),//->deck(),
             // "jokerdeck" => $jokerdeck,
         ];
 
@@ -190,46 +199,49 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-
         $hand = new CardHand;
-        // if($session->has("hand")){
+        // if($session->has("hand")) {
         //     $hand = $session->get("hand");
         // } else {
         //     $hand = array();
         // }
-      
+        
+        
         // $deckshuffle = $session->get('deckshuffle');//['value'];
+        // $shuffle = $session->get("deck", []);
+        $deck = $session->get('deck');
 
-        // $deck = array();
-        // // $deckarray = array_values($deckshuffle);
-        // foreach ($deckshuffle as $value) {
-        //     $deck[] = $value;
+        $deckarray = $deck;
+
+        // $decks = ['carddeck'];
+
+        // $deckarray = array();
+        // foreach ($deck[carddeck] as $value) {
+        //     $deckarray[] = $value;
         // }
 
-        $deck = array();
-        foreach($session->get('deckshuffle', array()) as $value) {
-            $deck[] = $value;
-        }
-        // $deck_keys = array_keys($deck);
-        // shuffle($deck_keys);
-
-        // foreach ( $deck_keys AS $deck_key ) {
-        //     $shuffled_array[  $deck_key  ] = $deck[  $deck_key  ];
-        // } 
-
-        $cut = array_slice($deck, 0, 1);
+        // foreach ($value as $value) {
+        //     $deckarray[] = $value;
+        // }
+        
+        // $num_cards->getNumberCards();
+        $hand->draw($deckarray);
+        
+        // $cut = array_slice($deck, 0, 1);
 
         // $session->set("deckshuffle", $deck);
 
-        $hand = $cut;
-
-        $session->set("hand", $hand);
+        $handadd = $hand;
+        // array_pop($deckarray);
+        $session->set("hand", $handadd);
+        // $session->set('jokers', $deck);
 
         $data = [
-            "hand" => $hand,
-            // "deckshuffle" => $deckshuffle,
-            "deck" => $deck,
-            "cut" => $cut,
+            "hand" =>  $hand->draw($deckarray),
+            "shuffle" => $deck,
+            "deck" => $session->get("deck"),
+            "deckarray" => $deckarray,
+            // "cut" => $cut,
         ];
         
         return $this->render('card/draw.html.twig', $data);

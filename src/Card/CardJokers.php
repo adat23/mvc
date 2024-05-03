@@ -4,7 +4,7 @@ namespace App\Card;
 
 class CardJokers extends Card
 {
-    private $cardjokers = [
+    public $cardjokers = [
         'Jo♠',
         'Jo♥',
         'Jo♦',
@@ -16,11 +16,11 @@ class CardJokers extends Card
         parent::__construct();
     }
 
-    public function jokers($joker)
+    public function jokers()
     {
-        array_push($joker, 'Jo♠', 'Jo♥', 'Jo♦','Jo♣');
-        $this->value = $joker;
-        return $this->value;
+        // array_push($deck, 'Jo♠', 'Jo♥', 'Jo♦','Jo♣');
+        $this->cardjokers;// = $deck;
+        return $this->cardjokers;
     }
 
 //     public function getAsString(): string

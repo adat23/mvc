@@ -8,16 +8,32 @@ class CardHand
 {
     private $hand = [];
 
-    public function add(Card $frck): void
+    public function add(Card $deck): void
     {
         $this->hand[] = $deck;
     }
 
-    public function draw(): void
+    public function draw($deck)
     {
-        foreach ($this->hand as $card) {
-            $card->draw();
+
+        // $deck = unserialize($deck);
+
+        $deckarray = array();
+
+        foreach( $deck as $value) {
+            $deckarray[] = $value;
         }
+                
+        $cut = array_splice($deckarray[0], 0, 1);
+
+        $hand = $cut;
+
+        $this->hand = $hand;
+        return $this->hand;
+
+        // foreach ($this->hand as $card) {
+        //     $card->draw();
+        // }
     }
 
     public function getNumberCards(): int

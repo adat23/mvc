@@ -3,9 +3,9 @@
 {% block title %}Cardgame{% endblock %}
 
 {% block body %}
-<h1>Visa kortleken</h1>
+<h1>Kort på handen</h1>
 
-<p>Här är kortleken</p>
+<p>Dessa kort har du på handen</p>
 
 
 
@@ -14,7 +14,7 @@
 
 {% if( hand ) %}
 <div class="full_deck">
-{% for value in hand|batch(4) %}  {# |batch(4) #}
+{% for value in hand|batch(4) %} {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           
@@ -44,9 +44,10 @@
 
 session: {{ dump(app.session.all) }}
 hand: {{ dump(hand) }}
-cut: {{ dump(cut) }}
+{# cut: {{ dump(cut) }} #}
 deck: {{ dump(deck) }}
-{# deckshuffle: {{ dump(deckshuffle) }} #}
+deckarray: {{ dump(deckarray) }}
+Shuffle: {{ dump(shuffle) }}
 
 
 {% include "footer.html.twig" %}
