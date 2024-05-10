@@ -14,43 +14,45 @@ class Card
 
     public function deck(): array
     {    
-        $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+        $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K');
         $suits  = array('♠', '♥', '♦', '♣');
-    
         $deck = array();
+        $deck_array = array();
+
         foreach ($suits as $suit) {
             foreach ($values as $value) {
                 $deck[] = $value . $suit;
             }
         };
 
-        serialize($deck);
-        $this->carddeck = $deck;
+        $deck_keys = array_keys($deck);
+        
+        foreach ( $deck_keys AS $deck_key ) {
+            $deck_array[ $deck_key ] = $deck[ $deck_key ];
+        }
+
+        $this->carddeck = $deck_array;
         return $this->carddeck;
     }
 
     public function shuffle_cards()
     {
-        $values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A');
+        $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', );
         $suits  = array('♠', '♥', '♦', '♣',);    
-
         $deck = array();
+        $shuffled_array = array();
+
         foreach ($suits as $suit) {
             foreach ($values as $value) {
                 $deck[] = $value . $suit;
             }
         };
-        
-        $shuffled_array = array();
 
         $deck_keys = array_keys($deck);
         shuffle($deck_keys);
-
         foreach ( $deck_keys AS $deck_key ) {
             $shuffled_array[ $deck_key ] = $deck[ $deck_key ];
         }
-        serialize($shuffled_array);
-
 
         $this->carddeck = $shuffled_array;
         return $this->carddeck;

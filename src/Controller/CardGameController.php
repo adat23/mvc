@@ -125,12 +125,16 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
+        if($session->has('hand')) {
+            $session->remove('hand');
+        }
         $deck = new Card();
 
-        $deckObject = $deck;
-        
+        $deck->deck();
+
         $session->set('deck', $deck);
-        // $_SESSION['deck'] = serialize($deck);
+        $session->set("cards_left", 52);
+
         $data = [
             "deck" => $deck->deck(),
         ];
@@ -144,27 +148,18 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $shuffle = $session->get('deck');
-        
-        // unserialize($shuffle);
-        
-        // // $shuffle2[] = unserialize($shuffle);
-        // foreach($shuffle as $key=>$value) {
-        //     $shuffle[] = $value;
-        // };
-        // shuffle($shuffle);
-        // $shuffle->shuffle_cards($shuffle);
+        if($session->has('hand')) {
+            $session->remove('hand');
+        }
+        $shuffle = new Card();
+  
         $shuffle->shuffle_cards();
 
-        // serialize($shuffle);
-        // $_SESSION["deck"] = $shuffle;
+        $session->set("cards_left", 52);
         $session->set('deck', $shuffle);
 
-        // $session->set("total_cards", $total_cards);
-
         $data = [
-            // "deck" => $session->get("deck"),
-            "deck" => $shuffle, //->shuffle_cards($deckshuffle), 
+            "deck" => $shuffle,
         ];
 
         return $this->render('card/shuffle.html.twig', $data);
@@ -176,21 +171,20 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $deck[] = unserialize($session->get('deck'));
+        $deck[] = $session->get('deck');
         $jokers = new CardJokers($deck);
         // $joker = array_merge([carddeck], $jokers);
         // $deckjokers = array_merge($deck, $jokers[cardjokers]);
-        $session->set("jokers", serialize($jokers));
+        $jokers->jokers();
+        
+        $session->set("jokers", $jokers);
 
         $data = [
             "jokers" => $jokers->jokers($deck),
-            // "deck" => $session->get("deck"), blir fel för att det inte är direkt länkat till arrayet.
-            "deck" => unserialize($session->get('deck')),//->deck(),
-            // "jokerdeck" => $jokerdeck,
+            "deck" => $session->get('deck'),//->deck(),
         ];
 
         return $this->render('card/joker.html.twig', $data);
-        // return $this->redirectToRoute('session');
     }
 
     #[Route("/card/deck/draw", name: "draw", methods: ['GET'])]
@@ -199,52 +193,140 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response
     {
+        if($session->has('cards_left')){
+            $cards_left = $session->get('cards_left');
+        } 
         $hand = new CardHand;
-        // if($session->has("hand")) {
-        //     $hand = $session->get("hand");
-        // } else {
-        //     $hand = array();
-        // }
-        
-        
-        // $deckshuffle = $session->get('deckshuffle');//['value'];
-        // $shuffle = $session->get("deck", []);
         $deck = $session->get('deck');
 
-        $deckarray = $deck;
+        $hand->draw($deck);
 
-        // $decks = ['carddeck'];
+        if($session->has('hand')) {
+            $oldhand = $session->get('hand');
+        } else {
+            $oldhand = $hand;
+        }
+        $deckrem = $hand;
+// ----------------
+        $deckforremoval = array();
+        foreach( $deck as $value) {
+            $deckforremoval[] = $value;
+        }
 
-        // $deckarray = array();
-        // foreach ($deck[carddeck] as $value) {
-        //     $deckarray[] = $value;
-        // }
+        foreach( $deckrem->draw($deck) as $value) {
+            $rem[] = $value;
+        }
 
-        // foreach ($value as $value) {
-        //     $deckarray[] = $value;
-        // }
-        
-        // $num_cards->getNumberCards();
-        $hand->draw($deckarray);
-        
-        // $cut = array_slice($deck, 0, 1);
+        if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
+            unset($deckforremoval[0][$key]);
+        }
+//------------------
+        $newhand = $rem;
 
-        // $session->set("deckshuffle", $deck);
+        if($oldhand != $hand){
+            $newhand = $newhand + $oldhand;
+            array_push($newhand, $oldhand[0]);
+        } 
+        ksort($newhand);
+        $num_cards = count($deckforremoval[0]);
 
-        $handadd = $hand;
-        // array_pop($deckarray);
-        $session->set("hand", $handadd);
-        // $session->set('jokers', $deck);
-
+        $session->set("cards_left", $num_cards);
+        $session->set("hand", $newhand);
+        $session->set("deck", $deckforremoval);
+   
         $data = [
-            "hand" =>  $hand->draw($deckarray),
-            "shuffle" => $deck,
-            "deck" => $session->get("deck"),
-            "deckarray" => $deckarray,
-            // "cut" => $cut,
+            "num_cards" => $num_cards,
+            "newhand" => $newhand,
         ];
         
         return $this->render('card/draw.html.twig', $data);
     }
     
+    #[Route("/card/deck/draw/{num<\d+>}", name: "draw_many")]
+    public function drawMany(
+        int $num,
+        Request $request,
+        SessionInterface $session
+    ): Response
+    {
+        if($session->has('cards_left')){
+            $cards_left = $session->get('cards_left');
+        } 
+        if ($num > $cards_left) {
+            throw new \Exception("Du har inte så många kort kvar!");
+        }
+        $hand = new CardHand;
+        // $session->remove('hand');
+        $deck = $session->get('deck');
+        // for ($i = 1; $i <= $num; $i++) {
+        //     $hand->draw($deck);
+        // }
+
+        // for ($i = 1; $i <= $num; $i++) {
+        //     $hand->add(new Card);
+        // }
+        
+
+        // $hand->drawMany($deck, $num);
+
+        // $deckrem = $hand;
+        for($i = 1; $i <= $num; $i++) {
+            $hand->draw($deck);
+            
+            if($session->has('hand')) {
+                $oldhand = $session->get('hand');
+            } else {
+                $oldhand = $hand;
+            }
+            $deckforremoval = array();
+            foreach( $deck as $value) {
+                $deckforremoval[] = $value;
+            }
+
+            $rem = array();
+            foreach( $hand->draw($deck) as $value) {        
+                $rem[] = $value; // REM uppdateras inte -.-
+            }
+
+            $newhand = $rem;
+        
+            if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
+                unset($deckforremoval[0][$key]);
+            }
+
+            $newhand = $newhand + $oldhand;
+            array_push($newhand, $oldhand[0]);
+
+            $oldhand = $newhand;
+            if (array_key_exists(0, $deck)) {       
+                $deckdiff = array_diff($deck[0], $newhand);
+            } else {
+                $deckdiff = array_diff($deck, $newhand);
+            }
+            $newdeck[0] = $deckdiff;
+            
+            $session->set("hand", $newhand);
+            $deck = $deckforremoval;
+            ksort($newhand);
+        }
+        
+        $num_cards = count($deckforremoval[0]);
+        $session->set("cards_left", $num_cards);
+        
+        $session->set("deck", $deckforremoval);
+        $data = [
+            "num_cards" => $num_cards,
+            "newhand" => $newhand,
+            "deckforremoval" => $deckforremoval[0],
+            "hand" => $hand,
+            "oldhand" => $oldhand,
+            "deck" => $deck,
+            "newdeck" => $newdeck,
+            "rem" => $rem,
+            "num" => $num,
+        ];
+        
+        return $this->render('card/draw_many.html.twig', $data);
+    }
+
 }

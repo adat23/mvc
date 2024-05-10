@@ -5,7 +5,7 @@
 {% block body %}
 <h1>Kort på handen</h1>
 
-<p>Du har {{ num_cards }} kort kvar i kortleken. <a href={{ path('draw') }}>Dra ett nytt kort?</a></p>
+<p>Du har {{ num_cards }} kort kvar i kortleken.
 <p>Detta/dessa kort har du på handen:</p>
 
 {% if( newhand ) %}
@@ -37,18 +37,20 @@
 <p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
 {% endif %}
 
- {# session: {{ dump(app.session.all) }} #}
-{# hand: {{ dump(hand) }} #}
-{# rem: {{ dump(rem) }} #}
-{# deck: {{ dump(deck) }} #}
- {# deckarray: {{ dump(deckarray) }}  #}
+ session: {{ dump(app.session.all) }}
+ num: {{ dump(num) }}
+hand: {{ dump(hand) }}
+rem: {{ dump(rem) }}
+deck: {{ dump(deck) }}
+ deckremoval: {{ dump(deckforremoval) }} 
  {# Shuffle: {{ dump(shuffle) }} #}
 {# deckrem: {{ dump(deckrem) }} #}
-{# newhand: {{ dump(newhand) }} #}
-{# handold: {{ dump(oldhand) }}  #}
-{# key: {{ dump(key) }}  #}
+newhand: {{ dump(newhand) }}
+handold: {{ dump(oldhand) }} 
+newdeck: {{ dump(newdeck) }} 
 {# test: {{ dump(test) }} #}
-{# num cards: {{ dump(num_cards) }} #}
+num cards: {{ dump(num_cards) }}
+
 
 
 {% include "footer.html.twig" %}

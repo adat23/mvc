@@ -15,25 +15,32 @@ class CardHand
 
     public function draw($deck)
     {
-
-        // $deck = unserialize($deck);
-
         $deckarray = array();
 
         foreach( $deck as $value) {
             $deckarray[] = $value;
         }
-                
+
         $cut = array_splice($deckarray[0], 0, 1);
+        // $hand = $cut;
 
-        $hand = $cut;
-
-        $this->hand = $hand;
+        $this->hand = $cut;
         return $this->hand;
+    }
 
-        // foreach ($this->hand as $card) {
-        //     $card->draw();
-        // }
+    public function drawMany($deck, $num)
+    {
+        $deckarray = array();
+
+        foreach( $deck as $value) {
+            $deckarray[] = $value;
+        }
+
+        $cut[] = array_splice($deckarray, 0, $num);
+        // $hand[] = $cut;
+
+        $this->hand = $cut;
+        return $this->hand;
     }
 
     public function getNumberCards(): int

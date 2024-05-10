@@ -35,8 +35,8 @@
                 {% endif %}
             {% endfor %}
 {% endfor %}
- {% for value in deck.carddeck|batch(4) %}  {# |batch(4) #}
-            {% for column in value %}
+{# {% for value in deck|batch(4) %}  {# |batch(4) #}
+            {# {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           
                     {{ column }}
@@ -56,7 +56,7 @@
                 {% endif %}
             {% endfor %}
         
-{% endfor %}
+{% endfor %} #} 
 </div>
 {% else %}
 <p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
