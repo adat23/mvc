@@ -17,7 +17,7 @@ class CardHand
     {
         $deckarray = array();
 
-        foreach( $deck as $value) {
+        foreach($deck as $value) {
             $deckarray[] = $value;
         }
 
@@ -28,41 +28,41 @@ class CardHand
         return $this->hand;
     }
 
-    public function drawMany($deck, $num)
-    {
-        $deckarray = array();
+    // public function drawMany($deck, $num)
+    // {
+    //     $deckarray = array();
 
-        foreach( $deck as $value) {
-            $deckarray[] = $value;
-        }
+    //     foreach( $deck as $value) {
+    //         $deckarray[] = $value;
+    //     }
 
-        $cut[] = array_splice($deckarray, 0, $num);
-        // $hand[] = $cut;
+    //     $cut[] = array_splice($deckarray, 0, $num);
+    //     // $hand[] = $cut;
 
-        $this->hand = $cut;
-        return $this->hand;
-    }
+    //     $this->hand = $cut;
+    //     return $this->hand;
+    // }
 
-    public function getNumberCards(): int
-    {
-        return count($this->hand);
-    }
+    // public function getNumberCards(): int
+    // {
+    //     return count($this->hand);
+    // }
 
-    public function getValues(): array
-    {
-        $values = [];
-        foreach ($this->hand as $card) {
-            $values[] = $card->getValue();
-        }
-        return $values;
-    }
+    // public function getValues(): array
+    // {
+    //     $values = [];
+    //     foreach ($this->hand as $card) {
+    //         $values[] = $card->getValue();
+    //     }
+    //     return $values;
+    // }
 
-    public function getString(): array
-    {
-        $values = [];
-        foreach ($this->hand as $card) {
-            $values[] = $card->getAsString();
-        }
-        return $values;
-    }
+    // public function getString(): array
+    // {
+    //     $values = [];
+    //     foreach ($this->hand as $card) {
+    //         $values[] = $card->getAsString();
+    //     }
+    //     return $values;
+    // }
 }

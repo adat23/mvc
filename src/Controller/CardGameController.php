@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-
 class CardGameController extends AbstractController
 {
     #[Route("/test", name: "test_get", methods: ['GET'])]
@@ -27,8 +26,7 @@ class CardGameController extends AbstractController
     public function testCallback(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
 
         $num_cards = $request->request->get('num_cards');
 
@@ -48,8 +46,7 @@ class CardGameController extends AbstractController
     public function session(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
 
         $num_cards = $session->get("num_cards");
 
@@ -63,35 +60,32 @@ class CardGameController extends AbstractController
     #[Route("/session/delete", name: "session_delete_get", methods: ['GET'])]
     public function sessionDeleteGet(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         session_destroy();
 
         return $this->redirectToRoute('session');
-    } 
+    }
 
 
     #[Route("/session/delete", name: "session_delete_post", methods: ['POST'])]
     public function sessionDelete(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         session_destroy();
 
         return $this->redirectToRoute('session_delete_flash');
-    } 
+    }
 
     #[Route("/session/deleteflash", name: "session_delete_flash", methods: ['GET'])]
     public function sessionDeleteFlash(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $this->addFlash(
             'Sådär',
             'Nu är sessionen raderad'
         );
         return $this->redirectToRoute('session');
-    } 
+    }
 
     #[Route('/card', name: "card")]
     public function home(): Response
@@ -103,13 +97,12 @@ class CardGameController extends AbstractController
     public function init_deck(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
-        // $deck = new Card();
-        $hand = array();
+    ): Response {
+        if($session->has('hand')) {
+            $session->remove('hand');
+        }
 
-        // $session->set("deck", $deck);
-        
+        $session->set("cards_left", 52);
 
         $this->addFlash(
             'Sådär',
@@ -123,8 +116,7 @@ class CardGameController extends AbstractController
     public function deck(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if($session->has('hand')) {
             $session->remove('hand');
         }
@@ -146,13 +138,12 @@ class CardGameController extends AbstractController
     public function shuffle(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if($session->has('hand')) {
             $session->remove('hand');
         }
         $shuffle = new Card();
-  
+
         $shuffle->shuffle_cards();
 
         $session->set("cards_left", 52);
@@ -169,14 +160,12 @@ class CardGameController extends AbstractController
     public function addJoker(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck[] = $session->get('deck');
         $jokers = new CardJokers($deck);
-        // $joker = array_merge([carddeck], $jokers);
-        // $deckjokers = array_merge($deck, $jokers[cardjokers]);
+
         $jokers->jokers();
-        
+
         $session->set("jokers", $jokers);
 
         $data = [
@@ -191,12 +180,11 @@ class CardGameController extends AbstractController
     public function draw(
         Request $request,
         SessionInterface $session
-    ): Response
-    {
-        if($session->has('cards_left')){
+    ): Response {
+        if($session->has('cards_left')) {
             $cards_left = $session->get('cards_left');
-        } 
-        $hand = new CardHand;
+        }
+        $hand = new CardHand();
         $deck = $session->get('deck');
 
         $hand->draw($deck);
@@ -207,89 +195,77 @@ class CardGameController extends AbstractController
             $oldhand = $hand;
         }
         $deckrem = $hand;
-// ----------------
+        // ----------------
         $deckforremoval = array();
-        foreach( $deck as $value) {
+        foreach($deck as $value) {
             $deckforremoval[] = $value;
         }
 
-        foreach( $deckrem->draw($deck) as $value) {
+        foreach($deckrem->draw($deck) as $value) {
             $rem[] = $value;
         }
 
         if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
             unset($deckforremoval[0][$key]);
         }
-//------------------
+        //------------------
         $newhand = $rem;
 
-        if($oldhand != $hand){
+        if($oldhand != $hand) {
             $newhand = $newhand + $oldhand;
             array_push($newhand, $oldhand[0]);
-        } 
+        }
         ksort($newhand);
         $num_cards = count($deckforremoval[0]);
 
         $session->set("cards_left", $num_cards);
         $session->set("hand", $newhand);
         $session->set("deck", $deckforremoval);
-   
+
         $data = [
             "num_cards" => $num_cards,
             "newhand" => $newhand,
         ];
-        
+
         return $this->render('card/draw.html.twig', $data);
     }
-    
+
     #[Route("/card/deck/draw/{num<\d+>}", name: "draw_many")]
     public function drawMany(
         int $num,
         Request $request,
         SessionInterface $session
-    ): Response
-    {
-        if($session->has('cards_left')){
+    ): Response {
+        if($session->has('cards_left')) {
             $cards_left = $session->get('cards_left');
-        } 
+        }
         if ($num > $cards_left) {
             throw new \Exception("Du har inte så många kort kvar!");
         }
-        $hand = new CardHand;
-        // $session->remove('hand');
+        $hand = new CardHand();
+
         $deck = $session->get('deck');
-        // for ($i = 1; $i <= $num; $i++) {
-        //     $hand->draw($deck);
-        // }
 
-        // for ($i = 1; $i <= $num; $i++) {
-        //     $hand->add(new Card);
-        // }
-        
-
-        // $hand->drawMany($deck, $num);
-
-        // $deckrem = $hand;
         for($i = 1; $i <= $num; $i++) {
             $hand->draw($deck);
-            
+
             if($session->has('hand')) {
                 $oldhand = $session->get('hand');
             } else {
                 $oldhand = $hand;
             }
             $deckforremoval = array();
-            foreach( $deck as $value) {
+            foreach($deck as $value) {
                 $deckforremoval[] = $value;
             }
 
             $rem = array();
-            foreach( $hand->draw($deck) as $value) {        
-                $rem[] = $value; // REM uppdateras inte -.-
+            foreach($hand->draw($deck) as $value) {
+                $rem[] = $value;
             }
 
             $newhand = $rem;
-        
+
             if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
                 unset($deckforremoval[0][$key]);
             }
@@ -298,21 +274,21 @@ class CardGameController extends AbstractController
             array_push($newhand, $oldhand[0]);
 
             $oldhand = $newhand;
-            if (array_key_exists(0, $deck)) {       
+            if (array_key_exists(0, $deck)) {
                 $deckdiff = array_diff($deck[0], $newhand);
             } else {
                 $deckdiff = array_diff($deck, $newhand);
             }
             $newdeck[0] = $deckdiff;
-            
+
             $session->set("hand", $newhand);
             $deck = $deckforremoval;
             ksort($newhand);
         }
-        
+
         $num_cards = count($deckforremoval[0]);
         $session->set("cards_left", $num_cards);
-        
+
         $session->set("deck", $deckforremoval);
         $data = [
             "num_cards" => $num_cards,
@@ -325,7 +301,7 @@ class CardGameController extends AbstractController
             "rem" => $rem,
             "num" => $num,
         ];
-        
+
         return $this->render('card/draw_many.html.twig', $data);
     }
 

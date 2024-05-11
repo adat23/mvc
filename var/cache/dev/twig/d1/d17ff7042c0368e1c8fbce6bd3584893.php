@@ -51,10 +51,14 @@ class __TwigTemplate_13758cfb206a0e30ed4b9ece099806f0 extends Template
                 <li><a href=\"https://github.com/adat23/mvc.git\">Github</a></li>
                 <li><a href=\"";
         // line 10
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("session");
+        echo "\">Session</a></li>
+                <li><a href=\"";
+        // line 11
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("api");
         echo "\">API</a></li>
                 <li><a href=\"";
-        // line 11
+        // line 12
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("quote");
         echo "\">API-Quote</a></li>
             </ul>
@@ -107,7 +111,7 @@ class __TwigTemplate_13758cfb206a0e30ed4b9ece099806f0 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  58 => 11,  54 => 10,  43 => 1,);
+        return array (  62 => 12,  58 => 11,  54 => 10,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -121,6 +125,7 @@ class __TwigTemplate_13758cfb206a0e30ed4b9ece099806f0 extends Template
             Mitt github:
             <ul>
                 <li><a href=\"https://github.com/adat23/mvc.git\">Github</a></li>
+                <li><a href=\"{{ path('session') }}\">Session</a></li>
                 <li><a href=\"{{ path('api') }}\">API</a></li>
                 <li><a href=\"{{ path('quote') }}\">API-Quote</a></li>
             </ul>

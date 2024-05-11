@@ -91,35 +91,76 @@ class __TwigTemplate_2d4996f0688c7d098a0bf82fbb865bff extends Template
         <li><a href=\"";
         // line 9
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
-        echo "\">/</a></li>
+        echo "\">/</a>  - Hemsidan</li>
         <li><a href=\"";
         // line 10
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("about");
-        echo "\">/about</a></li>
+        echo "\">/about</a>    - En sida med information om mig</li>
         <li><a href=\"";
         // line 11
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("report");
-        echo "\">/report</a></li>
+        echo "\">/report</a>  - Sidan med rapporter</li>
         <li><a href=\"";
         // line 12
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lucky_number");
-        echo "\">/lucky</a></li>
-        <li><a href=\"/lucky/number\">/lucky/number</a></li>
-        <li><a href=\"/lucky/hi\">/lucky/hi</a></li>
-        <li><a href=\"";
-        // line 15
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("api");
-        echo "\">/api</a></li>
+        echo "\">/lucky</a> - Ett spel där du kan hoppas på en kattbild</li>
+        <li><a href=\"/lucky/number\">/lucky/number</a>   - Slumpar fram ett lyckonummer</li>
+        <li><a href=\"/lucky/hi\">/lucky/hi</a>   - En sida som säger Hej!</li>
+
         <li><a href=\"";
         // line 16
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("session");
+        echo "\">/session</a>    - Visa sessions information samt ta bort session</li>
+        <li><a href=\"";
+        // line 17
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("init_deck");
+        echo "\">/card/deckinit</a>    - Initiera kortleken </li>
+        <li><a href=\"";
+        // line 18
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deck");
+        echo "\">/card/deck</a> - Visa och initiera kortleken</li>
+        <li><a href=\"";
+        // line 19
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("shuffle");
+        echo "\">/card/deck/shuffle</a>  - Visa kortleken blandad</li>
+        <li><a href=\"";
+        // line 20
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("joker");
+        echo "\">/card/deck/joker</a> - Visa jokrar i till kortleken</li>
+        <li><a href=\"";
+        // line 21
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("draw");
+        echo "\">/card/deck/draw</a>    - Dra ett kort</li>
+        <li><a href=\"/card/deck/draw/5\">/card/deck/draw/:number</a>  - Dra godtyckligt antal kort(5 per standard)</li>
+
+
+        <li><a href=\"";
+        // line 25
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("api");
+        echo "\">/api</a>    - Denna sida</li>
+        <li><a href=\"";
+        // line 26
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("quote");
-        echo "\">/api/quote</a></li>
-        <li><a href=\"/api/lucky/number\">/api/lucky/number</a></li>
+        echo "\">/api/quote</a>    - Få ett quote framslumpat.</li>
+        <li><a href=\"/api/lucky/number\">/api/lucky/number</a>   - Api version av lyckonummer</li>
+        <li><a href=\"";
+        // line 28
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("apideck");
+        echo "\">/api/deck</a>   - Api version av att visa och initiera kortleken</li>
+        <li><a href=\"";
+        // line 29
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("apishuffle");
+        echo "\">/api/deck/shuffle</a>    - Api verison av visa kortleken blandad</li>
+        <li><a href=\"";
+        // line 30
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("apidraw");
+        echo "\">/api/deck/draw</a>  - Api version av dra ett kort</li>
+        <li><a href=\"/api/deck/draw/5\">/api/deck/draw/:number</a>   - Api version av dra godtyckligt antal kort(5 per standard)</li>
     </ul>
 ";
-        // line 19
-        $this->loadTemplate("footer.html.twig", "api.html.twig", 19)->display($context);
-        // line 20
+        // line 33
+        $this->loadTemplate("footer.html.twig", "api.html.twig", 33)->display($context);
+        // line 34
         echo "
 ";
         
@@ -151,7 +192,7 @@ class __TwigTemplate_2d4996f0688c7d098a0bf82fbb865bff extends Template
      */
     public function getDebugInfo()
     {
-        return array (  123 => 20,  121 => 19,  115 => 16,  111 => 15,  105 => 12,  101 => 11,  97 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  164 => 34,  162 => 33,  156 => 30,  152 => 29,  148 => 28,  143 => 26,  139 => 25,  132 => 21,  128 => 20,  124 => 19,  120 => 18,  116 => 17,  112 => 16,  105 => 12,  101 => 11,  97 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -164,15 +205,29 @@ class __TwigTemplate_2d4996f0688c7d098a0bf82fbb865bff extends Template
     <h1>Routes</h1>
     <p>Listan nedan har länkar till alla routes på denna hemsida</p>
     <ul class=\"api\">
-        <li><a href=\"{{ path('home') }}\">/</a></li>
-        <li><a href=\"{{ path('about') }}\">/about</a></li>
-        <li><a href=\"{{ path('report') }}\">/report</a></li>
-        <li><a href=\"{{ path('lucky_number') }}\">/lucky</a></li>
-        <li><a href=\"/lucky/number\">/lucky/number</a></li>
-        <li><a href=\"/lucky/hi\">/lucky/hi</a></li>
-        <li><a href=\"{{ path('api') }}\">/api</a></li>
-        <li><a href=\"{{ path('quote') }}\">/api/quote</a></li>
-        <li><a href=\"/api/lucky/number\">/api/lucky/number</a></li>
+        <li><a href=\"{{ path('home') }}\">/</a>  - Hemsidan</li>
+        <li><a href=\"{{ path('about') }}\">/about</a>    - En sida med information om mig</li>
+        <li><a href=\"{{ path('report') }}\">/report</a>  - Sidan med rapporter</li>
+        <li><a href=\"{{ path('lucky_number') }}\">/lucky</a> - Ett spel där du kan hoppas på en kattbild</li>
+        <li><a href=\"/lucky/number\">/lucky/number</a>   - Slumpar fram ett lyckonummer</li>
+        <li><a href=\"/lucky/hi\">/lucky/hi</a>   - En sida som säger Hej!</li>
+
+        <li><a href=\"{{ path('session') }}\">/session</a>    - Visa sessions information samt ta bort session</li>
+        <li><a href=\"{{ path('init_deck') }}\">/card/deckinit</a>    - Initiera kortleken </li>
+        <li><a href=\"{{ path('deck') }}\">/card/deck</a> - Visa och initiera kortleken</li>
+        <li><a href=\"{{ path('shuffle') }}\">/card/deck/shuffle</a>  - Visa kortleken blandad</li>
+        <li><a href=\"{{ path('joker') }}\">/card/deck/joker</a> - Visa jokrar i till kortleken</li>
+        <li><a href=\"{{ path('draw') }}\">/card/deck/draw</a>    - Dra ett kort</li>
+        <li><a href=\"/card/deck/draw/5\">/card/deck/draw/:number</a>  - Dra godtyckligt antal kort(5 per standard)</li>
+
+
+        <li><a href=\"{{ path('api') }}\">/api</a>    - Denna sida</li>
+        <li><a href=\"{{ path('quote') }}\">/api/quote</a>    - Få ett quote framslumpat.</li>
+        <li><a href=\"/api/lucky/number\">/api/lucky/number</a>   - Api version av lyckonummer</li>
+        <li><a href=\"{{ path('apideck') }}\">/api/deck</a>   - Api version av att visa och initiera kortleken</li>
+        <li><a href=\"{{ path('apishuffle') }}\">/api/deck/shuffle</a>    - Api verison av visa kortleken blandad</li>
+        <li><a href=\"{{ path('apidraw') }}\">/api/deck/draw</a>  - Api version av dra ett kort</li>
+        <li><a href=\"/api/deck/draw/5\">/api/deck/draw/:number</a>   - Api version av dra godtyckligt antal kort(5 per standard)</li>
     </ul>
 {% include \"footer.html.twig\" %}
 

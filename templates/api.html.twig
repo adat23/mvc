@@ -6,15 +6,29 @@
     <h1>Routes</h1>
     <p>Listan nedan har länkar till alla routes på denna hemsida</p>
     <ul class="api">
-        <li><a href="{{ path('home') }}">/</a></li>
-        <li><a href="{{ path('about') }}">/about</a></li>
-        <li><a href="{{ path('report') }}">/report</a></li>
-        <li><a href="{{ path('lucky_number') }}">/lucky</a></li>
-        <li><a href="/lucky/number">/lucky/number</a></li>
-        <li><a href="/lucky/hi">/lucky/hi</a></li>
-        <li><a href="{{ path('api') }}">/api</a></li>
-        <li><a href="{{ path('quote') }}">/api/quote</a></li>
-        <li><a href="/api/lucky/number">/api/lucky/number</a></li>
+        <li><a href="{{ path('home') }}">/</a>  - Hemsidan</li>
+        <li><a href="{{ path('about') }}">/about</a>    - En sida med information om mig</li>
+        <li><a href="{{ path('report') }}">/report</a>  - Sidan med rapporter</li>
+        <li><a href="{{ path('lucky_number') }}">/lucky</a> - Ett spel där du kan hoppas på en kattbild</li>
+        <li><a href="/lucky/number">/lucky/number</a>   - Slumpar fram ett lyckonummer</li>
+        <li><a href="/lucky/hi">/lucky/hi</a>   - En sida som säger Hej!</li>
+
+        <li><a href="{{ path('session') }}">/session</a>    - Visa sessions information samt ta bort session</li>
+        <li><a href="{{ path('init_deck') }}">/card/deckinit</a>    - Initiera kortleken </li>
+        <li><a href="{{ path('deck') }}">/card/deck</a> - Visa och initiera kortleken</li>
+        <li><a href="{{ path('shuffle') }}">/card/deck/shuffle</a>  - Visa kortleken blandad</li>
+        <li><a href="{{ path('joker') }}">/card/deck/joker</a> - Visa jokrar i till kortleken</li>
+        <li><a href="{{ path('draw') }}">/card/deck/draw</a>    - Dra ett kort</li>
+        <li><a href="/card/deck/draw/5">/card/deck/draw/:number</a>  - Dra godtyckligt antal kort(5 per standard)</li>
+
+
+        <li><a href="{{ path('api') }}">/api</a>    - Denna sida</li>
+        <li><a href="{{ path('quote') }}">/api/quote</a>    - Få ett quote framslumpat.</li>
+        <li><a href="/api/lucky/number">/api/lucky/number</a>   - Api version av lyckonummer</li>
+        <li><a href="{{ path('apideck') }}">/api/deck</a>   - Api version av att visa och initiera kortleken</li>
+        <li><a href="{{ path('apishuffle') }}">/api/deck/shuffle</a>    - Api verison av visa kortleken blandad</li>
+        <li><a href="{{ path('apidraw') }}">/api/deck/draw</a>  - Api version av dra ett kort</li>
+        <li><a href="/api/deck/draw/5">/api/deck/draw/:number</a>   - Api version av dra godtyckligt antal kort(5 per standard)</li>
     </ul>
 {% include "footer.html.twig" %}
 

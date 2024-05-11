@@ -30,6 +30,9 @@ return [
         '/card/deck/shuffle' => [[['_route' => 'shuffle', '_controller' => 'App\\Controller\\CardGameController::shuffle'], null, ['GET' => 0], null, false, false, null]],
         '/card/deck/joker' => [[['_route' => 'joker', '_controller' => 'App\\Controller\\CardGameController::addJoker'], null, ['GET' => 0], null, false, false, null]],
         '/card/deck/draw' => [[['_route' => 'draw', '_controller' => 'App\\Controller\\CardGameController::draw'], null, ['GET' => 0], null, false, false, null]],
+        '/api/deck' => [[['_route' => 'apideck', '_controller' => 'App\\Controller\\CardGameJson::apiDeck'], null, ['GET' => 0], null, false, false, null]],
+        '/api/deck/shuffle' => [[['_route' => 'apishuffle', '_controller' => 'App\\Controller\\CardGameJson::apiShuffle'], null, ['GET' => 0], null, false, false, null]],
+        '/api/deck/draw' => [[['_route' => 'apidraw', '_controller' => 'App\\Controller\\CardGameJson::apiDraw'], null, ['GET' => 0], null, false, false, null]],
         '/lucky/number' => [[['_route' => 'app_lucky_number', '_controller' => 'App\\Controller\\LuckyController::number'], null, null, null, false, false, null]],
         '/lucky/hi' => [[['_route' => 'app_lucky_hi', '_controller' => 'App\\Controller\\LuckyController::hi'], null, null, null, false, false, null]],
         '/api/lucky/number' => [[['_route' => 'app_lucky_jsonnumber', '_controller' => 'App\\Controller\\LuckyController::jsonNumber'], null, null, null, false, false, null]],
@@ -61,6 +64,7 @@ return [
                     .')'
                 .')'
                 .'|/card/deck/draw/(\\d+)(*:223)'
+                .'|/api/deck/draw/(\\d+)(*:251)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -72,8 +76,9 @@ return [
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        223 => [
-            [['_route' => 'draw_many', '_controller' => 'App\\Controller\\CardGameController::drawMany'], ['num'], null, null, false, true, null],
+        223 => [[['_route' => 'draw_many', '_controller' => 'App\\Controller\\CardGameController::drawMany'], ['num'], null, null, false, true, null]],
+        251 => [
+            [['_route' => 'apidrawmany', '_controller' => 'App\\Controller\\CardGameJson::api_Draw_Many'], ['num'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

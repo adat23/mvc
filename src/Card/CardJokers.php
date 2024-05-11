@@ -23,8 +23,8 @@ class CardJokers extends Card
         return $this->cardjokers;
     }
 
-//     public function getAsString(): string
-//     {
-//         return $this->representation[$this->value - 1];
-//     }
- }
+    //     public function getAsString(): string
+    //     {
+    //         return $this->representation[$this->value - 1];
+    //     }
+}

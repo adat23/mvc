@@ -36,7 +36,7 @@
 {% else %}
 <p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
 {% endif %}
-
+{# 
  session: {{ dump(app.session.all) }}
  num: {{ dump(num) }}
 hand: {{ dump(hand) }}
@@ -45,11 +45,11 @@ deck: {{ dump(deck) }}
  deckremoval: {{ dump(deckforremoval) }} 
  {# Shuffle: {{ dump(shuffle) }} #}
 {# deckrem: {{ dump(deckrem) }} #}
-newhand: {{ dump(newhand) }}
+{# newhand: {{ dump(newhand) }}
 handold: {{ dump(oldhand) }} 
-newdeck: {{ dump(newdeck) }} 
+newdeck: {{ dump(newdeck) }}  #}
 {# test: {{ dump(test) }} #}
-num cards: {{ dump(num_cards) }}
+{# num cards: {{ dump(num_cards) }}  #}
 
 
 

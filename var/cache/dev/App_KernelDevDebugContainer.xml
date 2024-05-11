@@ -365,6 +365,13 @@
         <argument type="service" id=".service_locator.jUv.zyj.App\Controller\CardGameController"/>
       </call>
     </service>
+    <service id="App\Controller\CardGameJson" class="App\Controller\CardGameJson" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jUv.zyj.App\Controller\CardGameJson"/>
+      </call>
+    </service>
     <service id="App\Controller\LuckyController" class="App\Controller\LuckyController" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\LuckyControllerJson" class="App\Controller\LuckyControllerJson" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" public="true" autowire="true" autoconfigure="true">
@@ -7032,6 +7039,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CardGameController" class="App\Controller\CardGameController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CardGameJson" class="App\Controller\CardGameJson" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CardGameJson" class="App\Controller\CardGameJson" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CardGameJson" class="App\Controller\CardGameJson" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\LuckyControllerTwig" class="App\Controller\LuckyControllerTwig" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8031,6 +8041,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jUv.zyj" method="withContext"/>
     </service>
+    <service id=".service_locator.jUv.zyj.App\Controller\CardGameJson" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CardGameJson"/>
+      <argument>App\Controller\CardGameJson</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jUv.zyj" method="withContext"/>
+    </service>
     <service id=".service_locator.jUv.zyj.App\Controller\LuckyControllerTwig" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\LuckyControllerTwig"/>
       <argument>App\Controller\LuckyControllerTwig</argument>
@@ -8207,6 +8223,7 @@
         <argument type="collection">
           <argument>App\Kernel</argument>
           <argument>App\Controller\CardGameController</argument>
+          <argument>App\Controller\CardGameJson</argument>
           <argument>App\Controller\LuckyControllerTwig</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
