@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Kortspel</h1>
-
+    {{ include('flash.html.twig') }}
     <ul>
         <li><a href="{{ path('init_deck') }}">Initiera kortleken</a></li>
         <li><a href="{{ path('deck') }}">Sortera kortleken</a></li>
@@ -23,7 +23,7 @@
 
         <img src='build/images/Umldeck.png' alt="UML Deck">
 
-{{ include('flash.html.twig') }}
+
 
 {% include "footer.html.twig" %}
 

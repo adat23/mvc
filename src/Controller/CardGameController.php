@@ -101,12 +101,17 @@ class CardGameController extends AbstractController
         if($session->has('hand')) {
             $session->remove('hand');
         }
+        $deck = new Card();
 
+        $deck->deck();
+       
+        $session->set('deck', serialize($deck));
         $session->set("cards_left", 52);
 
+
         $this->addFlash(
-            'Sådär',
-            'Nu är kortleken initierad'
+            'Nu är sessionen initierad',
+            'Nu är sessionen initierad, detta fungerar även via blanda eller sortera kortleken'
         );
 
         return $this->redirectToRoute('card');
@@ -123,12 +128,13 @@ class CardGameController extends AbstractController
         $deck = new Card();
 
         $deck->deck();
-
-        $session->set('deck', $deck);
+       
+        $session->set('deck', serialize($deck));
         $session->set("cards_left", 52);
+        // $deck = unserialize($session->get('deck'));
 
         $data = [
-            "deck" => $deck->deck(),
+            "deck" => unserialize($session->get('deck')),
         ];
 
         return $this->render('card/deck.html.twig', $data);
@@ -142,12 +148,13 @@ class CardGameController extends AbstractController
         if($session->has('hand')) {
             $session->remove('hand');
         }
+
         $shuffle = new Card();
 
         $shuffle->shuffle_cards();
 
         $session->set("cards_left", 52);
-        $session->set('deck', $shuffle);
+        $session->set('deck', serialize($shuffle));
 
         $data = [
             "deck" => $shuffle,
@@ -161,16 +168,16 @@ class CardGameController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $deck[] = $session->get('deck');
+        $deck[] = unserialize($session->get('deck'));
         $jokers = new CardJokers($deck);
 
         $jokers->jokers();
 
-        $session->set("jokers", $jokers);
+        $session->set("jokers", serialize($jokers));
 
         $data = [
             "jokers" => $jokers->jokers($deck),
-            "deck" => $session->get('deck'),//->deck(),
+            "deck" => unserialize($session->get('deck')),//->deck(),
         ];
 
         return $this->render('card/joker.html.twig', $data);
@@ -185,12 +192,12 @@ class CardGameController extends AbstractController
             $cards_left = $session->get('cards_left');
         }
         $hand = new CardHand();
-        $deck = $session->get('deck');
+        $deck = unserialize($session->get('deck'));
 
         $hand->draw($deck);
 
         if($session->has('hand')) {
-            $oldhand = $session->get('hand');
+            $oldhand = unserialize($session->get('hand'));
         } else {
             $oldhand = $hand;
         }
@@ -219,8 +226,8 @@ class CardGameController extends AbstractController
         $num_cards = count($deckforremoval[0]);
 
         $session->set("cards_left", $num_cards);
-        $session->set("hand", $newhand);
-        $session->set("deck", $deckforremoval);
+        $session->set("hand", serialize($newhand));
+        $session->set("deck", serialize($deckforremoval));
 
         $data = [
             "num_cards" => $num_cards,
@@ -244,13 +251,13 @@ class CardGameController extends AbstractController
         }
         $hand = new CardHand();
 
-        $deck = $session->get('deck');
+        $deck = unserialize($session->get('deck'));
 
         for($i = 1; $i <= $num; $i++) {
             $hand->draw($deck);
 
             if($session->has('hand')) {
-                $oldhand = $session->get('hand');
+                $oldhand = unserialize($session->get('hand'));
             } else {
                 $oldhand = $hand;
             }
@@ -281,7 +288,7 @@ class CardGameController extends AbstractController
             }
             $newdeck[0] = $deckdiff;
 
-            $session->set("hand", $newhand);
+            $session->set("hand", serialize($newhand));
             $deck = $deckforremoval;
             ksort($newhand);
         }
@@ -289,7 +296,7 @@ class CardGameController extends AbstractController
         $num_cards = count($deckforremoval[0]);
         $session->set("cards_left", $num_cards);
 
-        $session->set("deck", $deckforremoval);
+        $session->set("deck", serialize($deckforremoval));
         $data = [
             "num_cards" => $num_cards,
             "newhand" => $newhand,

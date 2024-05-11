@@ -7,14 +7,9 @@
 
 <p>Här är kortleken</p>
 
-
-
-
- {# '♠', '♥', '♦', '♣' #}
-
-{% if( deck ) %}
+{% if( deck.carddeck) %}
 <div class="full_deck">
-{% for value in deck|batch(4) %}  {# |batch(4) #}
+{% for value in deck.carddeck|batch(4) %}  {# |batch(4) #}
             {% for column in value %}
                  {% if '♠' in column %} 
                     <div class="card_♠">           
@@ -34,10 +29,10 @@
                     </div>
                 {% endif %}
             {% endfor %}
-        
-{% endfor %}
-</div>
+        {% endfor %}
+        </div>
 {% else %}
+
 <p>Kortleken behöver initieras, gör det med denna <a href="{{ path('init_deck') }}">länk</a> </p>
 {% endif %}
 

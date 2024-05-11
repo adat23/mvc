@@ -37,7 +37,7 @@ class Card
 
     public function shuffle_cards()
     {
-        $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', );
+        $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K');
         $suits  = array('♠', '♥', '♦', '♣');
         $deck = array();
         $shuffled_array = array();
