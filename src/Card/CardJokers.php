@@ -15,11 +15,11 @@ class CardJokers extends Card
     {
         parent::__construct();
     }
-
+    /** @return array<mixed> */
     public function jokers()
     {
         // array_push($deck, 'Jo♠', 'Jo♥', 'Jo♦','Jo♣');
-        $this->cardjokers;// = $deck;
+        // $this->cardjokers;// = $deck;
         return $this->cardjokers;
     }
 

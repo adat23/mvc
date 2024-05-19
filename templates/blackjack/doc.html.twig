@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blackjack doc{% endblock %}
+
+{% block body %}
+    <h1>Blackjack doc</h1>
+    {{ include('flash.html.twig') }}
+
+
+    <figure class="blackjack"><img src="{{ asset('build/images/blackjack.JPG') }}" alt="blackjack"></figure>
+
+    <h2>Klasser och Psuedokod</h2>
+    <p> Jag kommer återanvända klasser från tidigare projekt i form av Card och CardHand för att skapa kortleken samt korthanden för både spelaren och dealern.
+    Utöver dessa kommer jag att skapa klasserna Blackjack för själva logiken i spelet och poängsystemet. 
+    <p>Jag tänker mig att själva controllern för Blackjack kommer att innehålla en initiering av spelet, samt formulärbitarna 
+        för spelet med frågan om spelaren vill ha ett kort till eller ej.
+        <pre>   
+            Starta spelet:  
+                $playerhand = Blackjack->draw();
+                $bankhand = Blackjack->draw();
+                $playerhand = $playerhand + Blackjack->draw();
+            Fråga spelaren om dom vill dra ett kort till eller stanna.
+            Dra kort: 
+                $playerhand = $playerhand + Blackjack->draw();
+            Stanna: 
+                $bankhand = $bankhand + Blackjack->draw();
+        </pre>
+    <p>Själva initieringen av spelet kommer i stort sett bara bestå av en kort loop där spelarna får sina kort. Draw funktionen 
+        återanvänds från tidigare uppgifter och returneras bara till spelarens hand eller dealerns hand. 
+        <pre>
+            $card draw();
+            return $card; 
+        </pre>
+    <p>Efter initieringen så ska det först jämföras om spelaren fått 21 poäng redan där för då har spelaren vunnit och spelet är över. Annars går det vidare till frågan om spelaren 
+        vill ha ett kort till eller ej.
+        <pre>
+            if($playerhand == 21) {
+                go to playerwin(flashmeddelande);
+            } else {
+                go to hitorstay;
+            }
+        </pre>
+    <p>Om spelaren vill ha ett kort till plockas det med draw() funktionen igen och jämförs med ifall spelarens totalpoäng är högre än 21, vilket i så fall innebär att banken vinner. 
+        <pre>
+            if($playerhand > 21) {
+                go to bankwin(flashmeddelande);
+            } else {
+                go to hitorstay;
+            }
+        </pre>
+    <p>När spelaren väljer att stanna går det vidare till bankens tur att få sina kort. När banken fått sitt andra kort jämför man ifall det är lägre eller lika med 16, 
+        om totalpoängen är under 17 måste banken ta ett kort till. Efter att banken kommit till 17 eller högre så körs en kontroll på ifall banken kommit över 21, då vinner spelaren.
+        <pre>
+            if($bankhand >= 16) {
+                $bankhand = $bankhand + Blackjack->draw();
+            } else {
+                go to bankcheck;
+            }
+            Bankcheck: 
+            if($bankhand > 21) {
+                go to playerwin(flashmeddelande);
+            } else {
+                go to compare;
+            }
+            Compare:
+            if($bankhand >= $playerhand) {
+                go to bankwin(flashmeddelane);
+            } else {
+                go to playerwin(flashmeddelande);
+            }
+        </pre>
+    <p>Dealern vinner om spelaren och dealern har samma poäng. När spelet är över får spelaren en presentation av ställning och frågan om dom vill spela igen och spelet börjar om. </p>
+
+    {% include "footer.html.twig" %}
+
+{% endblock %}

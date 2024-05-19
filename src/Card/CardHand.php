@@ -12,7 +12,10 @@ class CardHand
     {
         $this->hand[] = $deck;
     }
-
+    /** 
+    * @return array<mixed>
+    * @param array<mixed> $deck
+    */
     public function draw($deck)
     {
         $deckarray = array();

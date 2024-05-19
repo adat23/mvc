@@ -11,13 +11,13 @@ class Card
     {
         $this->carddeck = null;
     }
-
+    /** @return array<mixed> */
     public function deck(): array
     {
         $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K');
         $suits  = array('♠', '♥', '♦', '♣');
         $deck = array();
-        $deck_array = array();
+        $deckArray = array();
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
@@ -25,22 +25,22 @@ class Card
             }
         };
 
-        $deck_keys = array_keys($deck);
+        $deckKeys = array_keys($deck);
 
-        foreach ($deck_keys as $deck_key) {
-            $deck_array[ $deck_key ] = $deck[ $deck_key ];
+        foreach ($deckKeys as $deckKey) {
+            $deckArray[ $deckKey ] = $deck[ $deckKey ];
         }
 
-        $this->carddeck = $deck_array;
+        $this->carddeck = $deckArray;
         return $this->carddeck;
     }
-
-    public function shuffle_cards()
+    /** @return array<mixed> */
+    public function shuffleCards(): array
     {
         $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K');
         $suits  = array('♠', '♥', '♦', '♣');
         $deck = array();
-        $shuffled_array = array();
+        $shuffledArray = array();
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
@@ -48,22 +48,22 @@ class Card
             }
         };
 
-        $deck_keys = array_keys($deck);
-        shuffle($deck_keys);
-        foreach ($deck_keys as $deck_key) {
-            $shuffled_array[ $deck_key ] = $deck[ $deck_key ];
+        $deckKeys = array_keys($deck);
+        shuffle($deckKeys);
+        foreach ($deckKeys as $deckKey) {
+            $shuffledArray[ $deckKey ] = $deck[ $deckKey ];
         }
 
-        $this->carddeck = $shuffled_array;
+        $this->carddeck = $shuffledArray;
         return $this->carddeck;
     }
-
-    public function api_deck(): array
+    /** @return array<mixed> */
+    public function apiDeck(): array
     {
         $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K');
         $suits  = array('S', 'H', 'D', 'C');
         $deck = array();
-        $deck_array = array();
+        $deckArray = array();
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
@@ -71,22 +71,22 @@ class Card
             }
         };
 
-        $deck_keys = array_keys($deck);
+        $deckKeys = array_keys($deck);
 
-        foreach ($deck_keys as $deck_key) {
-            $deck_array[ $deck_key ] = $deck[ $deck_key ];
+        foreach ($deckKeys as $deckKey) {
+            $deckArray[ $deckKey ] = $deck[ $deckKey ];
         }
 
-        $this->carddeck = $deck_array;
+        $this->carddeck = $deckArray;
         return $this->carddeck;
     }
-
-    public function api_shuffle_cards()
+    /** @return array<mixed> */
+    public function apiShuffleCards()
     {
         $values = array('A','2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', );
         $suits  = array('S', 'H', 'D', 'C');
         $deck = array();
-        $shuffled_array = array();
+        $shuffledArray = array();
 
         foreach ($suits as $suit) {
             foreach ($values as $value) {
@@ -94,13 +94,13 @@ class Card
             }
         };
 
-        $deck_keys = array_keys($deck);
-        shuffle($deck_keys);
-        foreach ($deck_keys as $deck_key) {
-            $shuffled_array[ $deck_key ] = $deck[ $deck_key ];
+        $deckKeys = array_keys($deck);
+        shuffle($deckKeys);
+        foreach ($deckKeys as $deckKey) {
+            $shuffledArray[ $deckKey ] = $deck[ $deckKey ];
         }
 
-        $this->carddeck = $shuffled_array;
+        $this->carddeck = $shuffledArray;
         return $this->carddeck;
     }
 

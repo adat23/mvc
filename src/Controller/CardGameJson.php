@@ -17,7 +17,6 @@ class CardGameJson extends AbstractController
 {
     #[Route("/api/deck", name: "apideck", methods: ['GET'])]
     public function apiDeck(
-        Request $request,
         SessionInterface $session
     ): Response {
         if($session->has('hand')) {
@@ -25,13 +24,13 @@ class CardGameJson extends AbstractController
         }
         $deck = new Card();
 
-        $deck->api_deck();
+        $deck->apiDeck();
 
         $session->set('deck', $deck);
         $session->set("cards_left", 52);
 
         $data = [
-            "deck" => $deck->api_deck(),
+            "deck" => $deck->apiDeck(),
         ];
         // return new JsonResponse($data);
 
@@ -44,7 +43,6 @@ class CardGameJson extends AbstractController
 
     #[Route("/api/deck/shuffle", name: "apishuffle", methods: ['GET'])]
     public function apiShuffle(
-        Request $request,
         SessionInterface $session
     ): Response {
         if($session->has('hand')) {
@@ -52,7 +50,7 @@ class CardGameJson extends AbstractController
         }
         $shuffle = new Card();
 
-        $shuffle->api_shuffle_cards();
+        $shuffle->apiShuffleCards();
 
         $session->set("cards_left", 52);
         $session->set('deck', $shuffle);
@@ -70,22 +68,16 @@ class CardGameJson extends AbstractController
 
     #[Route("/api/deck/draw", name: "apidraw", methods: ['GET'])]
     public function apiDraw(
-        Request $request,
         SessionInterface $session
     ): Response {
-        if($session->has('cards_left')) {
-            $cards_left = $session->get('cards_left');
-        }
         $hand = new CardHand();
         $deck = $session->get('deck');
 
         $hand->draw($deck);
-
+        $oldhand = $hand;
         if($session->has('hand')) {
             $oldhand = $session->get('hand');
-        } else {
-            $oldhand = $hand;
-        }
+        } 
         $deckrem = $hand;
         // ----------------
         $deckforremoval = array();
@@ -93,11 +85,12 @@ class CardGameJson extends AbstractController
             $deckforremoval[] = $value;
         }
 
+        $rem = array();
         foreach($deckrem->draw($deck) as $value) {
             $rem[] = $value;
         }
-
-        if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
+        $key = array_search($rem[0], $deckforremoval[0]);
+        if (($key) !== false) {
             unset($deckforremoval[0][$key]);
         }
         //------------------
@@ -108,14 +101,14 @@ class CardGameJson extends AbstractController
             array_push($newhand, $oldhand[0]);
         }
         ksort($newhand);
-        $num_cards = count($deckforremoval[0]);
+        $numCards = count($deckforremoval[0]);
 
-        $session->set("cards_left", $num_cards);
+        $session->set("cards_left", $numCards);
         $session->set("hand", $newhand);
         $session->set("deck", $deckforremoval);
 
         $data = [
-            "Cards_left" => $num_cards,
+            "Cards_left" => $numCards,
             "Hand" => $newhand,
         ];
 
@@ -127,15 +120,14 @@ class CardGameJson extends AbstractController
     }
 
     #[Route("/api/deck/draw/{num<\d+>}", name: "apidrawmany", methods: ['GET'])]
-    public function api_Draw_Many(
+    public function apiDrawMany(
         int $num,
-        Request $request,
         SessionInterface $session
     ): Response {
         if($session->has('cards_left')) {
-            $cards_left = $session->get('cards_left');
+            $cardsLeft = $session->get('cards_left');
         }
-        if ($num > $cards_left) {
+        if ($num > $cardsLeft) {
             throw new \Exception("Du har inte så många kort kvar!");
         }
         $hand = new CardHand();
@@ -144,12 +136,11 @@ class CardGameJson extends AbstractController
 
         for($i = 1; $i <= $num; $i++) {
             $hand->draw($deck);
-
+            $oldhand[] = $hand;
             if($session->has('hand')) {
                 $oldhand = $session->get('hand');
-            } else {
-                $oldhand[] = $hand;
-            }
+            } 
+
             $deckforremoval = array();
             foreach($deck as $value) {
                 $deckforremoval[] = $value;
@@ -161,8 +152,8 @@ class CardGameJson extends AbstractController
             }
 
             $newhand = $rem;
-
-            if (($key = array_search($rem[0], $deckforremoval[0])) !== false) {
+            $key = array_search($rem[0], $deckforremoval[0]);
+            if (($key) !== false) {
                 unset($deckforremoval[0][$key]);
             }
 
@@ -175,19 +166,19 @@ class CardGameJson extends AbstractController
             } else {
                 $deckdiff = array_diff($deck, $newhand);
             }
-            $newdeck[0] = $deckdiff;
+            // $newdeck[0] = $deckdiff;
 
             $session->set("hand", $newhand);
             $deck = $deckforremoval;
             ksort($newhand);
         }
 
-        $num_cards = count($deckforremoval[0]);
-        $session->set("cards_left", $num_cards);
+        $numCards = count($deckforremoval[0]);
+        $session->set("cards_left", $numCards);
 
         $session->set("deck", $deckforremoval);
         $data = [
-            "Cards_left" => $num_cards,
+            "Cards_left" => $numCards,
             "Hand" => $newhand,
             // "deckforremoval" => $deckforremoval[0],
             // "hand" => $hand,

@@ -38,7 +38,7 @@ class LuckyControllerJson
         elseif ($number == 2):
             $quote = 'Det finns tre slags människor: De som kan räkna, och de som inte kan det.';
         elseif ($number == 3):
-            $quote = '640 kB borde vara tillräckligt för vem som helst.- Bill Gates';
+            $quote = '640 kB borde vara tillräckligt för vem som helst. -Bill Gates';
         else:
             $quote = 'Varför heter det surfa? Borde det inte heta sajt-seeing…';
         endif;

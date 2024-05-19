@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blackjack{% endblock %}
+
+{% block body %}
+    <h1>Blackjack</h1>
+    {{ include('flash.html.twig') }}
+
+    <p>Detta är startsidan för kortspelet BlackJack.<br><br>
+    Reglerna och spelsättet för blackjack är följande:<br>
+    - Grundregeln är att få 21 eller komma närmre 21 än banken/dealern. <br>
+    - Alla klädda kort räknas som 10poäng, kort med siffror följer valören på kortet och Ess kan vara antingen 1 eller 11. 
+    - Dealern vinner om ni får samma poäng eller om du går över 21. <br>
+    - Alla spelare får ett kort, därefter får dealern ett kort. <br>
+    - Efter detta får samtliga spelare ytterligare ett kort som vänds upp så att alla ser. Lyckas man få 21 här har man vunnit. <br>
+    - Dealern får ett kort till men detta är dolt för samtliga spelare.<br>
+    - Varje spelare få nu välja om man vill fortsätta med ytterligare kort
+    eller om man stannar med de kort man har på handen.<br>
+    - När alla spelare valt att stanna vänds dealerns kort och presenteras, om dealerns
+    hand är under 17 tar dealern ett kort till annars stannar spelet där.<br>
+    - De spelare som har högre poäng än dealern vinner.<br>
+
+    <li><a href="{{ path('doc') }}">Doc</a></li>
+{% include "footer.html.twig" %}
+
+{% endblock %}
